@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\Base\TimeHandler;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class Document extends Base
 {
@@ -59,6 +57,7 @@ class Document extends Base
     public static function setDocument(Request $request)
     {
         $tags = '';
+        // dd($request->all());
         foreach ($request->tag as $tag) {
             $tags .= "%%" . $tag;
         }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [DocumentController::class, 'index']);
-Route::post('/store', [DocumentController::class, 'store'])->name('document.store');
-Route::get('/index', function () {
-    return view('pages.index');
-});
+Route::post('store', [DocumentController::class, 'store'])->name('document.store');
+Route::post('edit', [DocumentController::class, 'edit'])->name('document.edit');
+Route::post('delete', [DocumentController::class, 'delete'])->name('document.delete');
+// Category routes
+Route::get('category/', [CategoryController::class, 'index'])->name('category.index');
+Route::post('category/store', [CategoryController::class, 'store'])->name('category.store');
+Route::post('category/update', [CategoryController::class, 'update'])->name('category.update');
+Route::get('category/destroy/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');

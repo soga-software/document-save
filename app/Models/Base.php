@@ -35,11 +35,8 @@ class Base extends Model
      */
     public $timestamps = true;
 
-    const CREATED_AT = 'createTime';
-    const UPDATED_AT = 'updateTime';
-    const CREATER_BY = 'createUser';
-    const UPDATER_BY = 'updateUser';
-    const LANGUAGE_FILTER = 'language';
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
 
     public function __construct(array $attributes = [])
     {
@@ -134,8 +131,6 @@ class Base extends Model
     {
         $param[self::CREATED_AT] = @$param[self::CREATED_AT] ? $param[self::CREATED_AT] : $this->utcInt();
         $param[self::UPDATED_AT] = @$param[self::UPDATED_AT] ? $param[self::UPDATED_AT] : $this->utcInt();
-        $param[self::CREATER_BY] = $userId ? $userId : (isset(Auth::user()->id) ? Auth::user()->id : '');
-        $param[self::UPDATER_BY] = $userId ? $userId : (isset(Auth::user()->id) ? Auth::user()->id : '');
         $isInserted = $this->insert($param);
 
         return $isInserted;
@@ -157,15 +152,11 @@ class Base extends Model
             foreach ($param as $key => $element) {
                 $element[self::CREATED_AT] = @$element[self::CREATED_AT] ? $element[self::CREATED_AT] : $this->utcInt();
                 $element[self::UPDATED_AT] = @$element[self::UPDATED_AT] ? $element[self::UPDATED_AT] : $this->utcInt();
-                $element[self::CREATER_BY] = $userId ? $userId : (isset(Auth::user()->id) ? Auth::user()->id : '');
-                $element[self::UPDATER_BY] = $userId ? $userId : (isset(Auth::user()->id) ? Auth::user()->id : '');
                 $param[$key] = $element;
             }
         } else {
             $param[self::CREATED_AT] = @$param[self::CREATED_AT] ? $param[self::CREATED_AT] : $this->utcInt();
             $param[self::UPDATED_AT] = @$param[self::UPDATED_AT] ? $param[self::UPDATED_AT] : $this->utcInt();
-            $param[self::CREATER_BY] = $userId ? $userId : (isset(Auth::user()->id) ? Auth::user()->id : '');
-            $param[self::UPDATER_BY] = $userId ? $userId : (isset(Auth::user()->id) ? Auth::user()->id : '');
         }
         $this->insert($param);
 
@@ -183,8 +174,6 @@ class Base extends Model
     {
         $param[self::CREATED_AT] = @$param[self::CREATED_AT] ? $param[self::CREATED_AT] : $this->utcInt();
         $param[self::UPDATED_AT] = @$param[self::UPDATED_AT] ? $param[self::UPDATED_AT] : $this->utcInt();
-        $param[self::CREATER_BY] = $userId ? $userId : (isset(Auth::user()->id) ? Auth::user()->id : '');
-        $param[self::UPDATER_BY] = $userId ? $userId : (isset(Auth::user()->id) ? Auth::user()->id : '');
 
         return $param;
     }
@@ -199,7 +188,6 @@ class Base extends Model
     public function setUpdateParam($param, $userId = null)
     {
         $param[self::UPDATED_AT] = @$param[self::UPDATED_AT] ? $param[self::UPDATED_AT] : $this->utcInt();
-        $param[self::UPDATER_BY] = $userId ? $userId : (isset(Auth::user()->id) ? Auth::user()->id : '');
 
         return $param;
     }

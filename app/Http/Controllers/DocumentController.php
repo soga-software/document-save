@@ -25,7 +25,7 @@ class DocumentController extends Controller
      */
     public function index(Request $request)
     {
-        $categoriesSelect = Category::categoryIndex();
+        $categoriesSelect = Category::categorySelect();
         $tagSelect = Tag::tagIndex();
         if (0 != $request->categoryId || '' != $request->tagId) {
             $documents = Document::documentIndex();
@@ -59,9 +59,7 @@ class DocumentController extends Controller
         ]);
         // Run check validaty if false
         $this->exam();
-        if (
-            $this->status == self::VALIDATE
-        ) {
+        if ($this->status == self::VALIDATE) {
             $request->flash('request', $request);
             return Response::redirectInput(self::INDEX_VIEW, $this->errors->all());
         }
