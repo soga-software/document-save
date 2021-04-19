@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DocumentController::class, 'index']);
+Route::get('/', [DocumentController::class, 'index'])->name('index');
 Route::post('store', [DocumentController::class, 'store'])->name('document.store');
 Route::post('edit', [DocumentController::class, 'edit'])->name('document.edit');
 Route::post('delete', [DocumentController::class, 'delete'])->name('document.delete');

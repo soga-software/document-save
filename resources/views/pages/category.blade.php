@@ -6,12 +6,11 @@
         <div class="page-title-box">
             <div class="float-right">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Soga Teams</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Category</a></li>
-                    <li class="breadcrumb-item active">Index</li>
+                    <li class="breadcrumb-item active"><a href="{{ route('index') }}">Trang chủ</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('category.index') }}">Chuyên mục</a></li>
                 </ol>
             </div>
-            <h4 class="page-title">Category Management</h4>
+            <h4 class="page-title">Quản lý chuyên mục</h4>
         </div>
     </div>
 </div>
