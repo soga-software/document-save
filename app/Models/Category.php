@@ -21,7 +21,7 @@ class Category extends Base
      */
     public static function categorySelect()
     {
-        $categories = self::where('deleted_at', null)->orderBy('category_name', 'ASC')->select('categories.*')->get();
+        $categories = self::where('deleted_at', null)->orderBy('category_name', 'ASC')->select('categories.id', 'categories.category_name')->get();
         return $categories;
     }
 
@@ -64,6 +64,8 @@ class Category extends Base
             'category_name' => $request->name_add,
             'icon' => $request->icon_add,
             'note' => $request->note_add,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
         ]);
 
         return $isInserted;
@@ -84,6 +86,7 @@ class Category extends Base
                 'category_name' => $request->name_edit,
                 'icon' => $request->icon_edit,
                 'note' => $request->note_edit,
+                'updated_at' => date('Y-m-d H:i:s')
             ]);
 
         return $updateResult;

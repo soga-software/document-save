@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class DocumentController extends Controller
 {
     // view contants
-    const INDEX_VIEW = 'pages.document';
+    const INDEX_VIEW = 'pages.document.index';
     const INDEX_ROUTE = 'document.index';
     const CREATE_RULE = array();
 
@@ -26,18 +26,19 @@ class DocumentController extends Controller
     public function index(Request $request)
     {
         $categoriesSelect = Category::categorySelect();
-        $tagSelect = Tag::tagIndex();
+        $tagSelect = Tag::tagSelect();
         if (0 != $request->categoryId || '' != $request->tagId) {
             $documents = Document::documentIndex();
         } else {
             $documents = Document::documentSearch($request);
         }
         $request->flash('request', $request);
-
         return view(self::INDEX_VIEW, array(
             'data' => array(
                 'categories' => $categoriesSelect,
+                'categoryJsons' => $categoriesSelect->toJson(),
                 'tags' => $tagSelect,
+                'tagJsons' => $tagSelect->toJson(),
                 'documents' => $documents,
             ),
         ));
@@ -70,70 +71,7 @@ class DocumentController extends Controller
 
         return redirect()
             ->route(self::INDEX_ROUTE)
-            ->with('messages', [__('lang.msg.createSuccess')]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $attributeGroup = $this->subModel->attributeGroupFull();
-
-        return view(self::CREATE_VIEW, ['datas' => ['attributeGroup' => $attributeGroup]]);
-    }
-
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function storeWebApi(Request $request)
-    {
-        $this->config([
-            'rule' => self::CREATE_RULE,
-            'request' => $request,
-        ]);
-        // Run check validaty if false
-        $this->exam();
-        if ($this->status == self::VALIDATE) {
-            return Response::errors(
-                $this->errors->all()
-            );
-        }
-        DB::transaction(function () use ($request) {
-            $this->model->attributeStore($request);
-        });
-
-        return Response::response(
-            ['message' => __('lang.attribute.massages_store_attribute_successful')]
-        );
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $attributeGroup = $this->subModel->attributeGroupFull();
-        $attribute = $this->model->attributeShow($id);
-
-        return view(self::UPDATE_VIEW, array(
-            'datas' => array(
-                'attribute' => $attribute,
-                'attributeGroup' => $attributeGroup,
-            ),
-        ));
+            ->with('messages', ['Tạo chuyên mục thành công']);
     }
 
     /**
@@ -163,64 +101,7 @@ class DocumentController extends Controller
 
         return redirect()
             ->route(self::INDEX_ROUTE)
-            ->with('messages', [__('lang.msg.updateSuccess')]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function updateWebApi(Request $request)
-    {
-        // setting config
-        $this->config([
-            'rule' => self::UPDATE_RULE,
-            'request' => $request,
-        ]);
-        // Run check validaty if false
-        $this->exam();
-        if ($this->status == self::VALIDATE) {
-            return Response::errors(
-                $this->errors->all()
-            );
-        }
-        DB::transaction(function () use ($request) {
-            $this->model->attributeUpdate($request, $request->id);
-        });
-
-        return Response::response(
-            ['message' => __('lang.attribute.messages_update_attribute_successful')]
-        );
-    }
-
-    /**
-     * Get attribute group full for item create.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function attributeShowWebApi(Request $request)
-    {
-        // setting config
-        $this->config([
-            'rule' => [],
-            'request' => $request,
-        ]);
-        // Run check validaty if false
-        $this->exam();
-        if ($this->status == self::VALIDATE) {
-            return Response::errors(
-                $this->errors->all()
-            );
-        }
-        $attribute = $this->model->attributeShow($request->id);
-
-        return Response::response(
-            $attribute
-        );
+            ->with('messages', ['Cập nhật chuyên mục thành công']);
     }
 
     /**

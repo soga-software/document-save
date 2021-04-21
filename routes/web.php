@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,8 @@ Route::get('category/', [CategoryController::class, 'index'])->name('category.in
 Route::post('category/store', [CategoryController::class, 'store'])->name('category.store');
 Route::post('category/update', [CategoryController::class, 'update'])->name('category.update');
 Route::get('category/destroy/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+// Tag routes
+Route::get('tag/', [TagController::class, 'index'])->name('tag.index');
+Route::post('tag/store', [TagController::class, 'store'])->name('tag.store');
+Route::post('tag/update', [TagController::class, 'update'])->name('tag.update');
+Route::get('tag/destroy/{id}', [TagController::class, 'destroy'])->name('tag.destroy');

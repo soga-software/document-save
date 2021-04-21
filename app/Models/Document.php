@@ -58,15 +58,19 @@ class Document extends Base
     {
         $tags = '';
         // dd($request->all());
-        foreach ($request->tag as $tag) {
-            $tags .= "%%" . $tag;
+        dd($request->all());
+        foreach ($request->tag_id as $tag) {
+            $tags .= $tag . ",";
         }
         $isInserted = self::insert([
             'name' => $request->name,
-            'category_id' => $request->categoryId,
+            'category_id' => $request->category_id,
             'tag' => $tags,
+            'type' => $request->type,
             'link' => $request->link,
             'note' => $request->note,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
         ]);
 
         return $isInserted;

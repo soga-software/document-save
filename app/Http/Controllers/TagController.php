@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Base\Response;
-use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class CategoryController extends Controller
+class TagController extends Controller
 {
     // view contants
-    const INDEX_VIEW = 'pages.category.index';
-    const INDEX_ROUTE = 'category.index';
+    const INDEX_VIEW = 'pages.tag.index';
+    const INDEX_ROUTE = 'tag.index';
     const CREATE_RULE = array();
+    const UPDATE_RULE = array();
     const DESTROY_RULE = array();
 
 
@@ -25,16 +26,16 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        if ('' != $request->category) {
-            $categories = Category::categoryIndex();
+        if ('' == $request->tag) {
+            $tags = Tag::tagIndex();
         } else {
-            $categories = Category::categorySearch($request);
+            $tags = Tag::tagSearch($request);
         }
         $request->flash('request', $request);
 
         return view(self::INDEX_VIEW, array(
             'data' => array(
-                'categories' => $categories,
+                'tags' => $tags,
             ),
         ));
     }
@@ -63,12 +64,12 @@ class CategoryController extends Controller
         }
 
         DB::transaction(function () use ($request) {
-            Category::setCategory($request);
+            Tag::setTag($request);
         });
 
         return redirect()
             ->route(self::INDEX_ROUTE)
-            ->with('messages', ['Tạo chuyên mục thành công']);
+            ->with('messages', ['Tạo tag thành công']);
     }
 
     /**
@@ -82,7 +83,7 @@ class CategoryController extends Controller
     {
         // setting config
         $this->config([
-            'rule' => self::CREATE_RULE,
+            'rule' => self::UPDATE_RULE,
             'request' => $request,
         ]);
         // Run check validaty if false
@@ -95,12 +96,12 @@ class CategoryController extends Controller
         }
 
         DB::transaction(function () use ($request) {
-            Category::updateCategory($request);
+            Tag::updateTag($request);
         });
 
         return redirect()
             ->route(self::INDEX_ROUTE)
-            ->with('messages', ['Cập nhật chuyên mục thành công']);
+            ->with('messages', ['Cập nhật tag thành công']);
     }
 
     /**
@@ -127,7 +128,7 @@ class CategoryController extends Controller
             return Response::redirect(self::INDEX_ROUTE, $this->errors->all());
         }
         DB::transaction(function () use ($request) {
-            Category::categoryDestroy($request);
+            Tag::tagDestroy($request);
         });
 
         return redirect()
