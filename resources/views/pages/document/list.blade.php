@@ -6,15 +6,15 @@
                 <div class="table-responsive">
                     <table class="table mb-0 table-centered">
                         <thead>
-                        <tr>
-                            <th><i class="fas fa-key"></i></th>
-                            <th><i class="far fa-bookmark"></i></th>
-                            <th><i class="fas fa-link"></i></th>
-                            <th><i class="fas fa-list"></i></th>
-                            <th><i class="fas fa-tags"></i></th>
-                            <th><i class="fab fa-affiliatetheme"></i></th>
-                            <th class="text-center"><i class="fas fa-ellipsis-v"></i></th>
-                        </tr>
+                            <tr>
+                                <th><i class="fas fa-key"></i></th>
+                                <th><i class="far fa-bookmark"></i></th>
+                                <th><i class="fas fa-list"></i></th>
+                                <th><i class="fas fa-tags"></i></th>
+                                <th><i class="fab fa-affiliatetheme"></i></th>
+                                <th><i class="fas fa-link"></i></th>
+                                <th class="text-center"><i class="fas fa-ellipsis-v"></i></th>
+                            </tr>
                         </thead>
                         <tbody>
                         @if(0 != sizeof($data['documents']))
@@ -22,11 +22,6 @@
                             <tr>
                                 <td id="td_id_{{ $document->id }}">{{ $document->id }}</td>
                                 <td id="td_name_{{ $document->id }}">{{ $document->name }}</td>
-                                <td>
-                                    <a id="td_link_{{ $document->id }}" href="{{ $document->link }}">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </a>
-                                </td>
                                 <td>
                                     <span id="td_category_id_{{ $document->id }}" class="d-none">{{ $document->category_id}}</span>
                                     <img src="{{URL::to('/')}}/assets/images/logo.png" alt="" class="rounded-circle thumb-xs mr-1">
@@ -42,6 +37,11 @@
                                     @endforeach
                                 </td>
                                 <td id="td_type_{{ $document->id }}">{{ $document->type }}</td>
+                                <td>
+                                    <a id="td_link_{{ $document->id }}" href="{{ $document->link }}">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </td>
                                 <td class="text-center">
                                     <span onclick="setDocumentEdit('{{$document->id}}')" class="badge badge-soft-secondary"  data-toggle="modal" data-target="#editModal" data-animation="fade" >
                                         <i class="las la-pen text-primary font-18"></i>
