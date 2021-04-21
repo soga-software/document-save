@@ -36,7 +36,6 @@ class Tag extends Base
      */
     public static function tagOfDocument($document)
     {
-        $idTags = str_replace("&&", "", $document->tag_id);
         $idTags = explode(",", $document->tag_id);
         $idTags = array_filter($idTags);
         $tags = self
@@ -81,6 +80,7 @@ class Tag extends Base
     public static function setTag(Request $request)
     {
         $isInserted = self::insert([
+            'id' => 'A' . time(),
             'tag_name' => $request->name_add,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')

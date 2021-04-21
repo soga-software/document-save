@@ -54,9 +54,9 @@ class Document extends Base
                 $sqlQuery->where(function ($query) use ($request) {
                     foreach ($request->tag_id as $key => $tag) {
                         if ($key == 0) {
-                            $query->where('documents.tag', 'LIKE', "%&&" . $tag . "&&%");
+                            $query->where('documents.tag', 'LIKE', "%" . $tag . "%");
                         } else {
-                            $query->orWhere('documents.tag', 'LIKE', "%&&" . $tag . "&&%");
+                            $query->orWhere('documents.tag', 'LIKE', "%" . $tag . "%");
                         }
                     }
                 });
@@ -77,9 +77,9 @@ class Document extends Base
         $tags = '';
         foreach ($request->tag_id_add as $key => $tag) {
             if (0 == $key) {
-                $tags .= "&&{$tag}&&";
+                $tags .= $tag;
             } else {
-                $tags .= ",&&{$tag}&&";
+                $tags .= ",{$tag}";
             }
         }
         $isInserted = self::insert([
@@ -101,9 +101,9 @@ class Document extends Base
         $tags = '';
         foreach ($request->tag_id_edit as $key => $tag) {
             if (0 == $key) {
-                $tags .= "&&{$tag}&&";
+                $tags .= $tag;
             } else {
-                $tags .= ",&&{$tag}&&";
+                $tags .= ",{$tag}";
             }
         }
         $isUpdated = self::where('id', $request->id_edit)
