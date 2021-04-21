@@ -36,6 +36,7 @@ class Tag extends Base
      */
     public static function tagOfDocument($document)
     {
+        $idTags = str_replace("&&", "", $document->tag_id);
         $idTags = explode(",", $document->tag_id);
         $idTags = array_filter($idTags);
         $tags = self

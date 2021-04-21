@@ -22,7 +22,7 @@ class Document extends Base
     public static function documentIndex()
     {
         $documents = self
-            ::leftJoin('categories', 'categories.id', 'documents.category_id')
+            ::join('categories', 'categories.id', 'documents.category_id')
             ->where('documents.deleted_at', null)
             ->orderBy('documents.name', 'ASC')
             ->select('documents.*', 'categories.category_name')
@@ -54,14 +54,15 @@ class Document extends Base
                 $sqlQuery->where(function ($query) use ($request) {
                     foreach ($request->tag_id as $key => $tag) {
                         if ($key == 0) {
-                            $query->where('documents.tag', 'LIKE', "%" . $tag . "%");
+                            $query->where('documents.tag', 'LIKE', "%&&" . $tag . "&&%");
                         } else {
-                            $query->orWhere('documents.tag', 'LIKE', "%" . $tag . "%");
+                            $query->orWhere('documents.tag', 'LIKE', "%&&" . $tag . "&&%");
                         }
                     }
                 });
             }
         }
+
         $documents = $sqlQuery
             ->where('documents.deleted_at', null)
             ->orderBy('documents.name', 'ASC')
@@ -74,8 +75,12 @@ class Document extends Base
     public static function setDocument(Request $request)
     {
         $tags = '';
-        foreach ($request->tag_id_add as $tag) {
-            $tags .= $tag . ",";
+        foreach ($request->tag_id_add as $key => $tag) {
+            if (0 == $key) {
+                $tags .= "&&{$tag}&&";
+            } else {
+                $tags .= ",&&{$tag}&&";
+            }
         }
         $isInserted = self::insert([
             'name' => $request->name_add,
@@ -94,10 +99,14 @@ class Document extends Base
     public static function updateDocument(Request $request)
     {
         $tags = '';
-        foreach ($request->tag_id_edit as $tag) {
-            $tags .= $tag . ",";
+        foreach ($request->tag_id_edit as $key => $tag) {
+            if (0 == $key) {
+                $tags .= "&&{$tag}&&";
+            } else {
+                $tags .= ",&&{$tag}&&";
+            }
         }
-        $isInserted = self::where('id', $request->id_edit)
+        $isUpdated = self::where('id', $request->id_edit)
             ->update([
                 'name' => $request->name_edit,
                 'category_id' => $request->category_id_edit,
@@ -109,17 +118,17 @@ class Document extends Base
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
 
-        return $isInserted;
+        return $isUpdated;
     }
 
     public static function destroyDocument(Request $request)
     {
-        $detroyResult = self::where('id', $request->id)->update(
+        $isDeleted = self::where('id', $request->id)->update(
             array(
                 'deleted_at' => date('Y-m-d H:i:s')
             )
         );
 
-        return $detroyResult;
+        return $isDeleted;
     }
 }
