@@ -16,17 +16,42 @@
                         <div class="form-group mb-3">
                             <input id="name_edit" name="name_edit" type="text" class="form-control" placeholder="Tên chuyên mục">
                         </div>
-
                         <div class="form-group mb-3">
-                            <input id="icon_edit" name="icon_edit" type="text" class="form-control" placeholder="Biểu tượng">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <select
+                                        id="category_id_edit" name="category_id_edit"
+                                        class="select2 form-control mb-3 custom-select" style="width: 100%; height:36px;" required>
+                                        <option value="0">Tất cả chuyên mục</option>
+                                        @foreach ($data['categories'] as $category)
+                                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select
+                                        id="tag_id_edit" name="tag_id_edit[]"
+                                        class="select2 mb-3 select2-multiple" style="width:100%"
+                                        multiple data-placeholder="Chọn tag" required>
+                                        <option value="0">Tất cả tag</option>
+                                        @foreach ($data['tags'] as $tag)
+                                            <option value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group mb-3">
-                            <input type="text" id="link" name="link" class="form-control" placeholder="Liên kết" required>
+                            <input type="text" id="link_edit" name="link_edit" class="form-control" placeholder="Liên kết" required>
                         </div>
 
                         <div class="form-group">
-                            <textarea id="note_edit" name="note_edit" class="form-control" rows="5" id="message" placeholder="Mô tả chuyên mục"></textarea>
+                            <input type="text" id="type_edit" name="type_edit" class="form-control" placeholder="Loại tài liệu">
+                        </div>
+
+                        <div class="form-group">
+                            <textarea class="form-control" id="note_edit" name="note_edit" rows="5" id="message" placeholder="Mô tả tài liệu"></textarea>
                         </div>
 
                         <div class="btn-toolbar form-group mb-0">
@@ -35,7 +60,7 @@
                                     <span>Lưu</span>
                                     <i class="far fa-paper-plane ml-3"></i>
                                 </button>
-                                <button type="button" class="btn btn-gradient-danger waves-effect waves-light">
+                                <button type="button" class="btn btn-gradient-danger waves-effect waves-light" data-dismiss="modal" >
                                     <span>Hủy</span>
                                     <i class="far fa-trash-alt ml-3"></i>
                                 </button>

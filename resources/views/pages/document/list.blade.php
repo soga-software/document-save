@@ -7,25 +7,38 @@
                     <table class="table mb-0 table-centered">
                         <thead>
                         <tr>
-                            <th>Chuyên mục</th>
-                            <th>Tài liệu</th>
-                            <th>Liên kết</th>
-                            <th>Tag</th>
-                            <th>Action</th>
+                            <th><i class="fas fa-key"></i></th>
+                            <th><i class="far fa-bookmark"></i></th>
+                            <th><i class="fas fa-link"></i></th>
+                            <th><i class="fas fa-list"></i></th>
+                            <th><i class="fas fa-tags"></i></th>
+                            <th><i class="fab fa-affiliatetheme"></i></th>
+                            <th class="text-center"><i class="fas fa-ellipsis-v"></i></th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(0 != sizeof($data['documents']))
                         @foreach ($data['documents'] as $document)
                             <tr>
+                                <td id="td_id_{{ $document->id }}">{{ $document->id }}</td>
+                                <td id="td_name_{{ $document->id }}">{{ $document->name }}</td>
+                                <td id="td_link_{{ $document->id }}">{{ $document->link }}</td>
                                 <td>
-                                    <img src="{{URL::to('/')}}/assets/images/widgets/project1.jpg" alt="" class="rounded-circle thumb-xs mr-1">
+                                    <span id="td_category_id_{{ $document->id }}" class="d-none">{{ $document->category_id}}</span>
+                                    <img src="{{URL::to('/')}}/assets/images/logo.png" alt="" class="rounded-circle thumb-xs mr-1">
                                     {{ $document->category_name }}
                                 </td>
-                                <td>{{ $document->name }}</td>
-                                <td>{{ $document->link }}</td>
-                                <td>{{ $document->tag }}</td>
                                 <td>
+                                    <span id="td_tag_id_{{ $document->id }}" class="d-none">{{ $document->tag_id}}</span>
+                                    <span id="td_note_{{ $document->id }}" class="d-none">{{ $document->category_id}}</span>
+                                    @foreach ($document->tagShow as $tag)
+                                        <a href="{{route('document.index')}}/?name=&category_id=0&tag_id%5B%5D={{ $tag->id }}">
+                                            <span class="badge badge-boxed  badge-soft-danger">{{ $tag->tag_name }}</span>
+                                        </a>
+                                    @endforeach
+                                </td>
+                                <td id="td_type_{{ $document->id }}">{{ $document->type }}</td>
+                                <td class="text-center">
                                     <span onclick="setDocumentEdit('{{$document->id}}')" class="badge badge-soft-secondary"  data-toggle="modal" data-target="#editModal" data-animation="fade" >
                                         <i class="las la-pen text-primary font-18"></i>
                                     </span>

@@ -6,27 +6,40 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="title_document" name="title_document" required="" placeholder="Tiêu đề">
+                                <input type="text" class="form-control" value="{{old('name', '')}}" id="name" name="name" placeholder="Tiêu đề">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <select
-                                id="categoryId"
-                                name="categoryId"
-                                value="{{old('categoryId', 0)}}"
+                                id="category_id"
+                                name="category_id"
+                                value="{{old('category_id', '')}}"
                                 class="select2 form-control mb-3 custom-select"
                                 style="width: 100%; height:36px;">
                                 <option value="0">Tất cả chuyên mục</option>
                                 @foreach ($data['categories'] as $category)
-                                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                    <option
+                                        value="{{ $category->id }}"
+                                        {{ (old('category_id')  == $category->id) ? 'selected' : ''}}>
+                                        {{ $category->category_name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <select  id="tagId" name="tagId" class="select2 mb-3 select2-multiple" style="width:100%" multiple="multiple" data-placeholder="Choose">
+                            <select
+                                id="tag_id" name="tag_id[]"
+                                class="select2 mb-3 select2-multiple" style="width:100%"
+                                multiple="multiple"
+                                data-placeholder="Chọn tag">
                                 <option value="0">Tất cả tag</option>
                                 @foreach ($data['tags'] as $tag)
-                                    <option value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
+                                    <option
+                                        value="{{ $tag->id }}"
+                                        {{--  {{ (old('tag_id')  == $tag->id) ? 'selected' : ''}}>  --}}
+                                        {{in_array($tag->id, old("tag_id") ? old("tag_id") : []) ? "selected": ""}}>
+                                        {{ $tag->tag_name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -34,7 +47,7 @@
                             <button type="submit" class="btn btn-sm btn-secondary px-4 btn-square waves-effect waves-light">
                                 <i class="fas fa-search"></i>
                             </button>
-                            <button type="submit" class="btn btn-sm btn-secondary px-4 btn-square waves-effect waves-light" data-toggle="modal" data-target="#addModal" data-animation="fade">
+                            <button type="button" class="btn btn-sm btn-secondary px-4 btn-square waves-effect waves-light" data-toggle="modal" data-target="#addModal" data-animation="fade">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>

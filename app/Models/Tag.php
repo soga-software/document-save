@@ -21,7 +21,29 @@ class Tag extends Base
      */
     public static function tagSelect()
     {
-        $tags = self::where('deleted_at', null)->orderBy('tag_name', 'ASC')->select('tags.id', 'tags.tag_name')->get();
+        $tags = self
+            ::where('deleted_at', null)
+            ->orderBy('tag_name', 'ASC')
+            ->select('tags.id', 'tags.tag_name')
+            ->get();
+        return $tags;
+    }
+
+    /**
+     * Get a listing of the resource.
+     *
+     * @return
+     */
+    public static function tagOfDocument($document)
+    {
+        $idTags = explode(",", $document->tag_id);
+        $idTags = array_filter($idTags);
+        $tags = self
+            ::where('deleted_at', null)
+            ->whereIn('id', $idTags)
+            ->orderBy('tag_name', 'ASC')
+            ->select('tags.id', 'tags.tag_name')
+            ->get();
         return $tags;
     }
 
@@ -45,7 +67,8 @@ class Tag extends Base
      */
     public static function tagSearch(Request $request)
     {
-        $tag = self::where('tags.tag_name', 'LIKE', "%" . $request->tag . "%")
+        $tag = self
+            ::where('tags.tag_name', 'LIKE', "%" . $request->tag . "%")
             ->where('deleted_at', null)
             ->orderBy('tag_name', 'ASC')
             ->select('tags.*')
@@ -75,7 +98,8 @@ class Tag extends Base
      */
     public static function updateTag(Request $request)
     {
-        $updateResult = self::where('id', $request->id_edit)
+        $updateResult = self
+            ::where('id', $request->id_edit)
             ->update([
                 'tag_name' => $request->name_edit,
                 'created_at' => date('Y-m-d H:i:s'),
@@ -93,11 +117,11 @@ class Tag extends Base
      */
     public static function tagDestroy(Request $request)
     {
-        $detroyResult = self::where('id', $request->id)->update(
-            array(
+        $detroyResult = self
+            ::where('id', $request->id)
+            ->update([
                 'deleted_at' => date('Y-m-d H:i:s')
-            )
-        );
+            ]);
 
         return $detroyResult;
     }

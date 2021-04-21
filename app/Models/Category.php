@@ -21,7 +21,11 @@ class Category extends Base
      */
     public static function categorySelect()
     {
-        $categories = self::where('deleted_at', null)->orderBy('category_name', 'ASC')->select('categories.id', 'categories.category_name')->get();
+        $categories = self
+            ::where('deleted_at', null)
+            ->orderBy('category_name', 'ASC')
+            ->select('categories.id', 'categories.category_name')
+            ->get();
         return $categories;
     }
 
@@ -32,7 +36,11 @@ class Category extends Base
      */
     public static function categoryIndex()
     {
-        $categories = self::where('deleted_at', null)->orderBy('category_name', 'ASC')->select('categories.*')->paginate(25);
+        $categories = self
+            ::where('deleted_at', null)
+            ->orderBy('category_name', 'ASC')
+            ->select('categories.*')
+            ->paginate(25);
         return $categories;
     }
 

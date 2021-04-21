@@ -27,10 +27,13 @@ class DocumentController extends Controller
     {
         $categoriesSelect = Category::categorySelect();
         $tagSelect = Tag::tagSelect();
-        if (0 != $request->categoryId || '' != $request->tagId) {
+        if (0 == $request->categoryId && empty($request->tagId)) {
             $documents = Document::documentIndex();
         } else {
             $documents = Document::documentSearch($request);
+        }
+        foreach ($documents as $document) {
+            $document->tagShow = Tag::tagOfDocument($document);
         }
         $request->flash('request', $request);
         return view(self::INDEX_VIEW, array(

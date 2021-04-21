@@ -13,14 +13,13 @@
                     <form action="{{route('document.store')}}" method="post">
                         @csrf
                         <div class="form-group mb-3">
-                            <input type="text" id="name" name="name"  class="form-control" placeholder="Tên tài liệu">
+                            <input type="text" id="name_add" name="name_add"  class="form-control" placeholder="Tên tài liệu">
                         </div>
                         <div class="form-group mb-3">
                             <div class="row">
                                 <div class="col-md-6">
                                     <select
-                                        id="category_id" name="category_id"
-                                        value="{{old('category_id', 0)}}"
+                                        id="category_id_add" name="category_id_add"
                                         class="select2 form-control mb-3 custom-select" style="width: 100%; height:36px;" required>
                                         <option value="0">Tất cả chuyên mục</option>
                                         @foreach ($data['categories'] as $category)
@@ -30,9 +29,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <select
-                                        id="tag_id" name="tag_id"
+                                        id="tag_id_add" name="tag_id_add[]"
                                         class="select2 mb-3 select2-multiple" style="width:100%"
-                                        multiple="multiple" data-placeholder="Choose" required>
+                                        multiple data-placeholder="Chọn tag" required>
                                         <option value="0">Tất cả tag</option>
                                         @foreach ($data['tags'] as $tag)
                                             <option value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
@@ -42,15 +41,15 @@
                             </div>
                         </div>
                         <div class="form-group mb-3">
-                            <input type="text" id="link" name="link" class="form-control" placeholder="Liên kết" required>
+                            <input type="text" id="link_add" name="link_add" class="form-control" placeholder="Liên kết" required>
                         </div>
 
                         <div class="form-group">
-                            <input type="text" id="type" name="type" class="form-control" placeholder="Loại tài liệu">
+                            <input type="text" id="type_add" name="type_add" class="form-control" placeholder="Loại tài liệu">
                         </div>
 
                         <div class="form-group">
-                            <textarea class="form-control" id="note" name="note" rows="5" id="message" placeholder="Mô tả tài liệu"></textarea>
+                            <textarea class="form-control" id="note_add" name="note_add" rows="5" id="message" placeholder="Mô tả tài liệu"></textarea>
                         </div>
 
                         <div class="btn-toolbar form-group mb-0">
@@ -59,7 +58,7 @@
                                     <span>Lưu</span>
                                     <i class="far fa-paper-plane ml-3"></i>
                                 </button>
-                                <button type="button" class="btn btn-gradient-danger waves-effect waves-light ">
+                                <button type="button" class="btn btn-gradient-danger waves-effect waves-light" data-dismiss="modal" >
                                     <span>Hủy</span>
                                     <i class="far fa-trash-alt ml-3"></i>
                                 </button>

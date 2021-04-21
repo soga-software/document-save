@@ -15,7 +15,7 @@
                             <span>Xóa</span>
                             <i class="far fa-paper-plane ml-3"></i>
                         </a>
-                        <button type="button" class="btn btn-gradient-success waves-effect waves-light ">
+                        <button type="button" class="btn btn-gradient-success waves-effect waves-light" data-dismiss="modal" >
                             <span>Hủy</span>
                             <i class="far fa-trash-alt ml-3"></i>
                         </button>
