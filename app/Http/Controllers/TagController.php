@@ -128,7 +128,7 @@ class TagController extends Controller
             return Response::redirect(self::INDEX_ROUTE, $this->errors->all());
         }
         DB::transaction(function () use ($request) {
-            Tag::tagDestroy($request);
+            Tag::destroyTag($request);
         });
 
         return redirect()

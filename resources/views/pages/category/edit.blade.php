@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="form-group">
-                            <textarea id="note_edit" name="note_edit" class="form-control" rows="5" id="message" placeholder="Mô tả chuyên mục"></textarea>
+                            <textarea id="note_edit" name="note_edit" class="form-control" rows="5" placeholder="Mô tả chuyên mục"></textarea>
                         </div>
 
                         <div class="btn-toolbar form-group mb-0">

@@ -127,7 +127,7 @@ class CategoryController extends Controller
             return Response::redirect(self::INDEX_ROUTE, $this->errors->all());
         }
         DB::transaction(function () use ($request) {
-            Category::categoryDestroy($request);
+            Category::destroyCategory($request);
         });
 
         return redirect()

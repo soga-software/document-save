@@ -22,7 +22,11 @@
                             <tr>
                                 <td id="td_id_{{ $document->id }}">{{ $document->id }}</td>
                                 <td id="td_name_{{ $document->id }}">{{ $document->name }}</td>
-                                <td id="td_link_{{ $document->id }}">{{ $document->link }}</td>
+                                <td>
+                                    <a id="td_link_{{ $document->id }}" href="{{ $document->link }}">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </td>
                                 <td>
                                     <span id="td_category_id_{{ $document->id }}" class="d-none">{{ $document->category_id}}</span>
                                     <img src="{{URL::to('/')}}/assets/images/logo.png" alt="" class="rounded-circle thumb-xs mr-1">

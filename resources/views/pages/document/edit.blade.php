@@ -3,18 +3,27 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title mt-0" id="eModalLabel">Thêm dữ liệu mới</h5>
+                <h5 class="modal-title mt-0" id="eModalLabel">Cập nhật dữ liệu mới</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="card mb-0 p-3">
-                    <form action="{{route('category.update')}}" method="post">
+                    <form action="{{route('document.update')}}" method="post">
                         @csrf
                         <input id="id_edit" name="id_edit" type="hidden">
-                        <div class="form-group mb-3">
-                            <input id="name_edit" name="name_edit" type="text" class="form-control" placeholder="Tên chuyên mục">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <input id="name_edit" name="name_edit" type="text" class="form-control" placeholder="Tên tài liệu">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" id="type_edit" name="type_edit" class="form-control" placeholder="Loại tài liệu">
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group mb-3">
                             <div class="row">
@@ -41,19 +50,12 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group mb-3">
                             <input type="text" id="link_edit" name="link_edit" class="form-control" placeholder="Liên kết" required>
                         </div>
-
                         <div class="form-group">
-                            <input type="text" id="type_edit" name="type_edit" class="form-control" placeholder="Loại tài liệu">
+                            <textarea class="form-control" id="note_edit" name="note_edit" rows="5" placeholder="Mô tả tài liệu"></textarea>
                         </div>
-
-                        <div class="form-group">
-                            <textarea class="form-control" id="note_edit" name="note_edit" rows="5" id="message" placeholder="Mô tả tài liệu"></textarea>
-                        </div>
-
                         <div class="btn-toolbar form-group mb-0">
                             <div class="pull-right">
                                 <button type="submit" class="btn btn-gradient-primary waves-effect waves-light">

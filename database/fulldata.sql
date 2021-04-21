@@ -29,15 +29,15 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table document_save.categories: 0 rows
+-- Dumping data for table document_save.categories: 30 rows
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 INSERT INTO `categories` (`id`, `category_name`, `icon`, `note`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'Laravel', '1111', 'Laravel Framework', NULL, '2021-04-19 15:41:34', '2021-04-19 15:41:34'),
+	(1, 'Reactjs2', NULL, NULL, NULL, '2021-04-21 05:46:18', '2021-04-21 05:46:18'),
 	(2, 'Laravel', '1111', 'Laravel Framework', NULL, '2021-04-19 15:43:18', '2021-04-19 15:43:18'),
-	(3, 'Laravel', 'Laravel Icon', 'Laravel Framework 8x', NULL, '2021-04-19 16:15:54', NULL),
+	(3, 'Reactjs3', NULL, 'AAAA', NULL, '2021-04-21 09:45:49', NULL),
 	(4, 'Reactjs', 'Reactjs Icon', 'Reactjs 16.x', NULL, NULL, NULL),
 	(5, '1', '1', '1', NULL, '2021-04-19 16:17:59', '2021-04-19 16:17:59'),
-	(6, '1', '1', '1', NULL, NULL, NULL),
+	(6, '1', '1', '1', NULL, '2021-04-21 05:52:48', '2021-04-21 05:52:48'),
 	(7, '2', '2', '2', NULL, NULL, NULL),
 	(8, '3', '3', '3', NULL, NULL, NULL),
 	(9, '4', '4', '4', NULL, NULL, NULL),
@@ -46,8 +46,8 @@ INSERT INTO `categories` (`id`, `category_name`, `icon`, `note`, `created_at`, `
 	(12, '7', '7', '7', NULL, NULL, NULL),
 	(13, '8', '8', '8', NULL, NULL, NULL),
 	(14, '9', '9', '9', NULL, NULL, NULL),
-	(15, '10', '10', '10', NULL, NULL, NULL),
-	(16, '11', '11', '11', NULL, NULL, NULL),
+	(15, '10', '10', '10', NULL, '2021-04-21 05:52:53', '2021-04-21 05:52:53'),
+	(16, '11aaa', '11aaa', '11aaa', NULL, '2021-04-21 05:53:04', NULL),
 	(17, '12', '12', '12', NULL, NULL, NULL),
 	(18, '13', '1', NULL, NULL, NULL, NULL),
 	(19, '14', '14', NULL, NULL, NULL, NULL),
@@ -67,20 +67,24 @@ INSERT INTO `categories` (`id`, `category_name`, `icon`, `note`, `created_at`, `
 -- Dumping structure for table document_save.documents
 CREATE TABLE IF NOT EXISTS `documents` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `category_id` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `tag` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `category_id` int DEFAULT NULL,
+  `tag_id` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `name` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `link` text COLLATE utf8mb4_unicode_ci,
-  `link_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table document_save.documents: 0 rows
 /*!40000 ALTER TABLE `documents` DISABLE KEYS */;
+INSERT INTO `documents` (`id`, `category_id`, `tag_id`, `type`, `name`, `link`, `note`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, 0, '2,3,', 'A', 'A', 'A', NULL, '2021-04-21 07:11:47', '2021-04-21 07:11:47', NULL),
+	(2, 0, '2,3,', 'A', 'A', 'A', NULL, '2021-04-21 07:12:26', '2021-04-21 07:12:26', NULL),
+	(3, 16, '3,', '2222', 'Reactjs2222', '2222', '2222', '2021-04-21 09:48:43', '2021-04-21 09:48:43', NULL);
 /*!40000 ALTER TABLE `documents` ENABLE KEYS */;
 
 -- Dumping structure for table document_save.migrations
@@ -105,10 +109,14 @@ CREATE TABLE IF NOT EXISTS `tags` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='tag of link';
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='tag of link';
 
 -- Dumping data for table document_save.tags: 0 rows
 /*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+INSERT INTO `tags` (`id`, `tag_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, 'Reactjs', '2021-04-21 05:46:11', '2021-04-21 05:48:20', '2021-04-21 05:48:20'),
+	(2, 'A', '2021-04-21 06:28:17', '2021-04-21 06:28:17', NULL),
+	(3, 'B', '2021-04-21 06:28:24', '2021-04-21 06:28:24', NULL);
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 
 -- Dumping structure for table document_save.users

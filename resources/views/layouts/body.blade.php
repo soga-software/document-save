@@ -4,7 +4,6 @@
     <div class="page-content">
 
         <div class="container">
-            @yield('page')
             <div class="row">
                 <div class="col-12">
                     @if(session('errors'))
@@ -26,9 +25,9 @@
                     @endif
                 </div>
             </div>
-        </div><!-- container -->
+            @yield('page')
+        </div>
     </div>
-    <!-- end page content -->
 </div>
 {{-- <!-- end page-wrapper -->
 <!-- jQuery  -->

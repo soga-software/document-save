@@ -17,7 +17,7 @@
     function setDocumentEdit(id) {
         $('#id_edit').val($("#td_id_" + id).text());
         $('#name_edit').val($("#td_name_" + id).text());
-        $('#link_edit').val($("#td_link_" + id).text());
+        $('#link_edit').val($("#td_link_" + id).attr('href'));
         $('#type_edit').val($("#td_type_" + id).text());
         $('#category_id_edit').val($("#td_category_id_" + id).text());
         $('#category_id_edit').select2();

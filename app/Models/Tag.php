@@ -115,7 +115,7 @@ class Tag extends Base
      *
      * @return
      */
-    public static function tagDestroy(Request $request)
+    public static function destroyTag(Request $request)
     {
         $detroyResult = self
             ::where('id', $request->id)

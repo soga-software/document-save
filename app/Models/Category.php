@@ -107,7 +107,7 @@ class Category extends Base
      *
      * @return
      */
-    public static function categoryDestroy(Request $request)
+    public static function destroyCategory(Request $request)
     {
         $detroyResult = self::where('id', $request->id)->update(
             array(

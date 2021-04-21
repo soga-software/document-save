@@ -91,11 +91,35 @@ class Document extends Base
         return $isInserted;
     }
 
-    public static function updateDocument()
+    public static function updateDocument(Request $request)
     {
+        $tags = '';
+        foreach ($request->tag_id_edit as $tag) {
+            $tags .= $tag . ",";
+        }
+        $isInserted = self::where('id', $request->id_edit)
+            ->update([
+                'name' => $request->name_edit,
+                'category_id' => $request->category_id_edit,
+                'tag_id' => $tags,
+                'type' => $request->type_edit,
+                'link' => $request->link_edit,
+                'note' => $request->note_edit,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+
+        return $isInserted;
     }
 
-    public static function deleteDocument()
+    public static function destroyDocument(Request $request)
     {
+        $detroyResult = self::where('id', $request->id)->update(
+            array(
+                'deleted_at' => date('Y-m-d H:i:s')
+            )
+        );
+
+        return $detroyResult;
     }
 }
