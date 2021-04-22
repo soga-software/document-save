@@ -25,7 +25,7 @@ class Document extends Base
             ::join('categories', 'categories.id', 'documents.category_id')
             ->where('documents.deleted_at', null)
             ->orderBy('documents.name', 'ASC')
-            ->select('documents.*', 'categories.category_name')
+            ->select('documents.*', 'categories.category_name', 'categories.icon AS category_icon')
             ->paginate(50);
 
         return $documents;
@@ -66,7 +66,7 @@ class Document extends Base
         $documents = $sqlQuery
             ->where('documents.deleted_at', null)
             ->orderBy('documents.name', 'ASC')
-            ->select('documents.*', 'categories.category_name')
+            ->select('documents.*', 'categories.category_name', 'categories.icon AS category_icon')
             ->paginate(50);
 
         return $documents;
