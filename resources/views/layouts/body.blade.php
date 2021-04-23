@@ -66,5 +66,5 @@
         $(element).attr("href", route);
     }
 </script>
-
+@yield('js')
 </body>

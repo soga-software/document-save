@@ -4,8 +4,8 @@
             <div class="card-body">
                 <h5 class="mt-0 header-title">Danh sách chuyên mục</h5>
                 <div class="table-responsive">
-                    <table class="table mb-0 table-centered">
-                        <thead>
+                    <table class="table mb-0">
+                        <thead class="thead-light">
                             <tr>
                                 <th>ID</th>
                                 <th>Icon</th>
@@ -20,9 +20,9 @@
                             <tr>
                                 <td id="td_id_{{ $category->id }}">{{ $category->id }}</td>
                                 <td>
-									<span id="td_icon_{{ $category->id }}" class="d-none">{{ $category->icon }}</span>
-									{!! $category->icon !!}
-								</td>
+                                    <span id="td_icon_{{ $category->id }}" class="d-none">{{ $category->icon }}</span>
+                                    {!! $category->icon !!}
+                                </td>
                                 <td id="td_category_name_{{ $category->id }}">{{ $category->category_name }}</td>
                                 <td id="td_note_{{ $category->id }}">{{ $category->note }}</td>
                                 <td>

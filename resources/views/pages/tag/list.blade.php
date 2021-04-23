@@ -4,8 +4,8 @@
             <div class="card-body">
                 <h5 class="mt-0 header-title">Danh sách tag</h5>
                 <div class="table-responsive">
-                    <table class="table mb-0 table-centered">
-                        <thead>
+                    <table class="table mb-0">
+                        <thead class="thead-light">
                             <tr>
                                 <th colspan="2" >ID</th>
                                 <th colspan="6" >Tên tag</th>

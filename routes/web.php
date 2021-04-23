@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/index', [DocumentController::class, 'index'])->name('document.index');
+Route::get('index', [DocumentController::class, 'index'])->name('document.index');
 Route::post('store', [DocumentController::class, 'store'])->name('document.store');
 Route::post('update', [DocumentController::class, 'update'])->name('document.update');
-Route::post('delete', [DocumentController::class, 'delete'])->name('document.destroy');
+Route::get('destroy', [DocumentController::class, 'destroy'])->name('document.destroy');
 // Category routes
 Route::get('category/', [CategoryController::class, 'index'])->name('category.index');
 Route::post('category/store', [CategoryController::class, 'store'])->name('category.store');

@@ -5,13 +5,15 @@
 @include('pages.document.add')
 @include('pages.document.edit')
 @include('pages.delete')
+@endsection
 
+@section('js')
 <script>
     $(document).ready(function() {
         $('#categoryId').select2();
         $('#tag').select2();
-        var categoryList = JSON.parse('{{ $data['categoryJsons'] }}');
-        var tagList = JSON.parse('{{ $data['tagJsons'] }}');
+        // var categoryList = JSON.parse('{{ $data['categoryJsons'] }}');
+        // var tagList = JSON.parse('{{ $data['tagJsons'] }}');
 
     });
     function setDocumentEdit(id) {
@@ -27,5 +29,28 @@
         $('#note_edit').val($("#td_note_" + id).text());
     }
 
+    function viewNote(id, isShow){
+        if(isShow){
+            $("#view_note_" + id).attr("class","text-muted font-11 mb-0");
+        } else {
+            $("#view_note_" + id).attr("class","d-none");
+        }
+    }
+
+    // function changeClassCSS(id, class){
+    //     $("#td_type_" + id).attr("class","badge badge-boxed badge-soft-" + class);
+    // }
+
+    // function changeColerBadge(id){
+    //     let typeSite = $("#td_type_" + id).text();
+    //     switch (typeSite.toUpperCase()) {
+    //         case 'VIBLO':
+    //             changeClassCSS(id, 'primary')
+    //             break;
+        
+    //         default:
+    //             break;
+    //     }
+    // }
 </script>
 @endsection

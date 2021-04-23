@@ -116,9 +116,8 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request)
     {
-        $request->request->add(['id' => $id]);
         // setting config
         $this->config([
             'rule' => self::DESTROY_RULE,
@@ -129,7 +128,7 @@ class DocumentController extends Controller
         if ($this->status == self::VALIDATE) {
             return Response::redirectInput(self::INDEX_VIEW, $this->errors->all(), $id);
         }
-        DB::transaction(function () use ($request, $id) {
+        DB::transaction(function () use ($request) {
             Document::destroyDocument($request);
         });
 
