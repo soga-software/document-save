@@ -22,7 +22,6 @@
     <link href="{{URL::to('/')}}/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     {{-- <link href="{{URL::to('/')}}/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" /> --}}
     <link href="{{URL::to('/')}}/assets/css/app.css" rel="stylesheet" type="text/css" />
-
-
+    <link href="{{URL::to('/')}}/assets/css/style.css" rel="stylesheet" type="text/css" />
 </head>
 

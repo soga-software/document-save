@@ -13,7 +13,7 @@
                                 <span id="td_category_id_{{ $document->id }}" class="d-none">{{ $document->category_id}}</span>
                                 <span id="td_tag_id_{{ $document->id }}" class="d-none">{{ $document->tag_id}}</span>
                                 <span id="td_note_{{ $document->id }}" class="d-none">{{ $document->note}}</span>
-                                <div class="card-subtitle font-14 mb-2 d-flex justify-content-between align-items-center">
+                                <div class="card-subtitle font-14 d-flex justify-content-between align-items-center mh-50">
                                     <h6 class="m-0" onclick="viewNote('{{$document->id}}', true)">
                                         <span id="td_name_{{ $document->id }}">{{ $document->name }}</span>
                                     </h6>

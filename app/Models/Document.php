@@ -42,21 +42,25 @@ class Document extends Base
     {
         $sqlQuery = self::join('categories', 'categories.id', 'documents.category_id');
         if ('' != $request->name) {
-            $sqlQuery->where('documents.name', $request->name);
+            $sqlQuery->where('documents.name', 'LIKE', "%" . $request->name . "%");
         }
-        if (0 != $request->category_id) {
+        if ('' != $request->type) {
+            $sqlQuery->where('documents.type', 'LIKE', "%" . $request->type . "%");
+        }
+        if ('0' != $request->category_id) {
             $sqlQuery->where('categories.id', $request->category_id);
         }
         if (!empty($request->tag_id)) {
             if (sizeof($request->tag_id) == 1) {
-                $sqlQuery->where('documents.tag', 'LIKE', "%" . $request->tag_id[0] . "%");
+                $sqlQuery->where('documents.tag_id', 'LIKE', "%" . $request->tag_id[0] . "%");
             } else {
                 $sqlQuery->where(function ($query) use ($request) {
                     foreach ($request->tag_id as $key => $tag) {
+                        dd($request->tag_id);
                         if ($key == 0) {
-                            $query->where('documents.tag', 'LIKE', "%" . $tag . "%");
+                            $query->where('documents.tag_id', 'LIKE', "%" . $tag . "%");
                         } else {
-                            $query->orWhere('documents.tag', 'LIKE', "%" . $tag . "%");
+                            $query->orWhere('documents.tag_id', 'LIKE', "%" . $tag . "%");
                         }
                     }
                 });

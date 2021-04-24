@@ -29,10 +29,15 @@ class DocumentController extends Controller
     {
         $categoriesSelect = Category::categorySelect();
         $tagSelect = Tag::tagSelect();
-        if (0 == $request->categoryId && empty($request->tagId)) {
-            $documents = Document::documentIndex();
-        } else {
+        if (
+            !empty($request->tag_id)
+            || (isset($request->categoryId) && '0' != $request->name)
+            || (isset($request->name) && null != $request->name)
+            || (isset($request->type) && null != $request->type)
+        ) {
             $documents = Document::documentSearch($request);
+        } else {
+            $documents = Document::documentIndex();
         }
         foreach ($documents as $document) {
             $document->tagShow = Tag::tagOfDocument($document);
@@ -69,7 +74,7 @@ class DocumentController extends Controller
             $request->flash('request', $request);
             return Response::redirectInput(self::INDEX_VIEW, $this->errors->all());
         }
-
+        $request->flash('request', $request);
         DB::transaction(function () use ($request) {
             Document::setDocument($request);
         });
@@ -99,6 +104,7 @@ class DocumentController extends Controller
         if ($this->status == self::VALIDATE) {
             return Response::redirectInput(self::INDEX_VIEW, $this->errors->all(), $id);
         }
+        $request->flash('request', $request);
         DB::transaction(function () use ($request) {
             Document::updateDocument($request);
         });

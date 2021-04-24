@@ -1,12 +1,17 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <form class="">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <input type="text" class="form-control" value="{{old('name', '')}}" id="name" name="name" placeholder="Tiêu đề">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="{{old('type', '')}}" id="type" name="type" placeholder="Loại tài liệu">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -26,7 +31,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <select
                                 id="tag_id" name="tag_id[]"
                                 class="select2 mb-3 select2-multiple" style="width:100%"
@@ -54,8 +59,18 @@
                     </div>
                 </form>
             </div>
-            @include('pages.nav')
+            <!-- Page-Title -->
+            <div class="col-md-3 text-right">
+                <a class="btn btn-secondary btn-sm btn-square waves-effect waves-light px-4" href="{{ route('document.index') }}">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a class="btn btn-success btn-sm btn-square waves-effect waves-light px-4" href="{{ route('category.index') }}">
+                    <i class="fas fa-list"></i>
+                </a>
+                <a class="btn btn-info btn-sm btn-square waves-effect waves-light px-4" href="{{ route('tag.index') }}">
+                    <i class="fas fa-tags"></i>
+                </a>
+            </div>
         </div>
-
     </div><!--end card-body-->
 </div><!--end card-->
