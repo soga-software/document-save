@@ -25,7 +25,7 @@
             </li>
             <li class="hide-phone app-search">
                 <form class="d-flex justify-content-end">
-                    <input type="text" id="category" value="{{old('category', '')}}"  name="category"  placeholder="Search..." class="form-control ui-autocomplete-input" autocomplete="off">
+                    <input type="text" id="category" value="{{old('library', '')}}"  name="category"  placeholder="Search..." class="form-control ui-autocomplete-input" autocomplete="off">
                     <div class="button-list btn-social-icon ml-2 d-flex align-items-center">
                         <button type="submit" class="btn btn-success btn-xs">Search</button>
                         <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addModal" data-animation="fade">Add</button>

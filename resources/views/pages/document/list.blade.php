@@ -8,8 +8,8 @@
                     @if(0 != sizeof($data['documents']))
                     @foreach ($data['documents'] as $document)
                     <div class="col-md-4">
-                        <div class="card card-border m-1">
-                            <div class="card-body p-3">
+                        <div class="card card-border m-1 bg-light">
+                            <div class="card-body p-2">
                                 <span id="td_category_id_{{ $document->id }}" class="d-none">{{ $document->category_id}}</span>
                                 <span id="td_tag_id_{{ $document->id }}" class="d-none">{{ $document->tag_id}}</span>
                                 <span id="td_note_{{ $document->id }}" class="d-none">{{ $document->note}}</span>
@@ -29,7 +29,7 @@
                                     <div class="d-flex justify-content-start">
                                     @foreach ($document->tagShow as $tag)
                                         <a class="mr-1" href="{{route('document.index')}}/?name=&category_id=0&tag_id%5B%5D={{ $tag->id }}">
-                                            <span class="badge badge-boxed badge-soft-info">{{ $tag->tag_name }}</span>
+                                            <span class="badge badge-boxed badge-soft-secondary">{{ $tag->tag_name }}</span>
                                         </a>
                                     @endforeach
                                     </div>

@@ -1,17 +1,19 @@
-<div class="card">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-9">
+@section('search')
+<div class="navbar-custom-menu mt-2 float-right">
+    <div id="navigation">
+        <!-- Navigation Menu-->
+        <ul class="navigation-menu">
+            <li class="has-submenu">
                 <form class="">
-                    <div class="row">
+                    <div class="row align-items-center">
                         <div class="col-md-2">
-                            <div class="form-group">
-                                <input type="text" class="form-control" value="{{old('name', '')}}" id="name" name="name" placeholder="Tiêu đề">
+                            <div class="form-group m-0">
+                                <input type="text" class="form-control br-50" value="{{old('name', '')}}" id="name" name="name" placeholder="Tiêu đề">
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <div class="form-group">
-                                <input type="text" class="form-control" value="{{old('type', '')}}" id="type" name="type" placeholder="Loại tài liệu">
+                            <div class="form-group m-0">
+                                <input type="text" class="form-control br-50" value="{{old('type', '')}}" id="type" name="type" placeholder="Loại tài liệu">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -19,7 +21,7 @@
                                 id="category_id"
                                 name="category_id"
                                 value="{{old('category_id', '')}}"
-                                class="select2 form-control mb-3 custom-select"
+                                class="select2 form-control custom-select br-50"
                                 style="width: 100%; height:36px;">
                                 <option value="0">Tất cả chuyên mục</option>
                                 @foreach ($data['categories'] as $category)
@@ -34,14 +36,13 @@
                         <div class="col-md-2">
                             <select
                                 id="tag_id" name="tag_id[]"
-                                class="select2 mb-3 select2-multiple" style="width:100%"
+                                class="select2 select2-multiple br-50" style="width:100%"
                                 multiple="multiple"
                                 data-placeholder="Chọn tag">
                                 <option value="0">Tất cả tag</option>
                                 @foreach ($data['tags'] as $tag)
                                     <option
                                         value="{{ $tag->id }}"
-                                        {{--  {{ (old('tag_id')  == $tag->id) ? 'selected' : ''}}>  --}}
                                         {{in_array($tag->id, old("tag_id") ? old("tag_id") : []) ? "selected": ""}}>
                                         {{ $tag->tag_name }}
                                     </option>
@@ -49,28 +50,17 @@
                             </select>
                         </div>
                         <div class="col-md-3 text-right">
-                            <button type="submit" class="btn btn-sm btn-secondary px-4 btn-square waves-effect waves-light">
-                                <i class="fas fa-search"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-secondary px-4 btn-square waves-effect waves-light" data-toggle="modal" data-target="#addModal" data-animation="fade">
-                                <i class="fas fa-plus"></i>
-                            </button>
+                            <div class="button-list btn-social-icon ml-2 d-flex align-items-center">
+                                <button type="submit" class="btn btn-success btn-xs">Search</button>
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addModal" data-animation="fade">Add</button>
+                                <a class="btn btn-danger btn-xs font-11" href="{{ route('category.index') }}">Category</a>
+                                <a class="btn btn-danger btn-xs font-11" href="{{ route('tag.index') }}">Tag</a>
+                            </div>
                         </div>
                     </div>
                 </form>
-            </div>
-            <!-- Page-Title -->
-            <div class="col-md-3 text-right">
-                <a class="btn btn-secondary btn-sm btn-square waves-effect waves-light px-4" href="{{ route('document.index') }}">
-                    <i class="fas fa-home"></i>
-                </a>
-                <a class="btn btn-success btn-sm btn-square waves-effect waves-light px-4" href="{{ route('category.index') }}">
-                    <i class="fas fa-list"></i>
-                </a>
-                <a class="btn btn-info btn-sm btn-square waves-effect waves-light px-4" href="{{ route('tag.index') }}">
-                    <i class="fas fa-tags"></i>
-                </a>
-            </div>
-        </div>
-    </div><!--end card-body-->
-</div><!--end card-->
+            </li>
+        </ul>
+    </div>
+</div>
+@endsection

@@ -1,8 +1,8 @@
 <body data-layout="horizontal" class="">
-<div>
+@include('layouts.topbar')
+<div class="page-wrapper mt-1">
     <!-- Page Content-->
     <div class="page-content">
-
         <div class="container">
             <div class="row">
                 <div class="col-12">

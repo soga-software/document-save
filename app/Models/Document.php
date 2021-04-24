@@ -127,12 +127,7 @@ class Document extends Base
 
     public static function destroyDocument(Request $request)
     {
-        $isDeleted = self::where('id', $request->id)->update(
-            array(
-                'deleted_at' => date('Y-m-d H:i:s')
-            )
-        );
-
+        $isDeleted = self::where('id', $request->id)->update(['deleted_at' => date('Y-m-d H:i:s')]);
         return $isDeleted;
     }
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Http\Request;
 
-class Tag extends Base
+class Library extends Base
 {
 
     /**
@@ -12,21 +12,21 @@ class Tag extends Base
      *
      * @var string
      */
-    protected $table = 'tags';
+    protected $table = 'libraries';
 
     /**
      * Get a listing of the resource.
      *
      * @return
      */
-    public static function tagSelect()
+    public static function librarySelect()
     {
-        $tags = self
+        $libraries = self
             ::where('deleted_at', null)
-            ->orderBy('tag_name', 'ASC')
-            ->select('tags.id', 'tags.tag_name')
+            ->orderBy('library_name', 'ASC')
+            ->select('libraries.id', 'libraries.library_name')
             ->get();
-        return $tags;
+        return $libraries;
     }
 
     /**
@@ -34,17 +34,17 @@ class Tag extends Base
      *
      * @return
      */
-    public static function tagOfDocument($document)
+    public static function libraryOfDocument($document)
     {
-        $idTags = explode(",", $document->tag_id);
-        $idTags = array_filter($idTags);
-        $tags = self
+        $idLibrary = explode(",", $document->library_id);
+        $idLibrary = array_filter($idLibrary);
+        $libraries = self
             ::where('deleted_at', null)
-            ->whereIn('id', $idTags)
-            ->orderBy('tag_name', 'ASC')
-            ->select('tags.id', 'tags.tag_name')
+            ->whereIn('id', $idLibrary)
+            ->orderBy('library_name', 'ASC')
+            ->select('libraries.id', 'libraries.library_name')
             ->get();
-        return $tags;
+        return $libraries;
     }
 
     /**
@@ -52,10 +52,10 @@ class Tag extends Base
      *
      * @return
      */
-    public static function tagIndex()
+    public static function libraryIndex()
     {
-        $tags = self::where('deleted_at', null)->orderBy('tag_name', 'ASC')->select('tags.*')->paginate(25);
-        return $tags;
+        $libraries = self::where('deleted_at', null)->orderBy('library_name', 'ASC')->select('libraries.*')->paginate(25);
+        return $libraries;
     }
 
     /**
@@ -65,23 +65,24 @@ class Tag extends Base
      *
      * @return
      */
-    public static function tagSearch(Request $request)
+    public static function librarySearch(Request $request)
     {
-        $tag = self
-            ::where('tags.tag_name', 'LIKE', "%" . $request->tag . "%")
+        $library = self
+            ::where('libraries.library_name', 'LIKE', "%" . $request->library . "%")
             ->where('deleted_at', null)
-            ->orderBy('tag_name', 'ASC')
-            ->select('tags.*')
+            ->orderBy('library_name', 'ASC')
+            ->select('libraries.*')
             ->paginate(25);
 
-        return $tag;
+        return $library;
     }
 
-    public static function setTag(Request $request)
+    public static function setLibrary(Request $request)
     {
         $isInserted = self::insert([
-            'id' => 'A' . time(),
-            'tag_name' => $request->name_add,
+            'library_name' => $request->name_add,
+            'link' => $request->link_add,
+            'note' => $request->note_add,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);
@@ -97,12 +98,14 @@ class Tag extends Base
      *
      * @return \Illuminate\Http\Response
      */
-    public static function updateTag(Request $request)
+    public static function updateLibrary(Request $request)
     {
         $updateResult = self
             ::where('id', $request->id_edit)
             ->update([
-                'tag_name' => $request->name_edit,
+                'library_name' => $request->name_edit,
+                'link' => $request->link_edit,
+                'note' => $request->note_edit,
                 'created_at' => date('Y-m-d H:i:s'),
             ]);
 
@@ -116,7 +119,7 @@ class Tag extends Base
      *
      * @return
      */
-    public static function destroyTag(Request $request)
+    public static function destroyLibrary(Request $request)
     {
         $detroyResult = self::where('id', $request->id)->update(['deleted_at' => date('Y-m-d H:i:s')]);
         return $detroyResult;

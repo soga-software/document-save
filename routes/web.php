@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,8 @@ Route::get('tag/', [TagController::class, 'index'])->name('tag.index');
 Route::post('tag/store', [TagController::class, 'store'])->name('tag.store');
 Route::post('tag/update', [TagController::class, 'update'])->name('tag.update');
 Route::get('tag/destroy/{id}', [TagController::class, 'destroy'])->name('tag.destroy');
+// Library routes
+Route::get('library/', [LibraryController::class, 'index'])->name('library.index');
+Route::post('library/store', [LibraryController::class, 'store'])->name('library.store');
+Route::post('library/update', [LibraryController::class, 'update'])->name('library.update');
+Route::get('library/destroy/{id}', [LibraryController::class, 'destroy'])->name('library.destroy');

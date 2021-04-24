@@ -8,10 +8,6 @@
 @include('pages.delete')
 
 <script>
-    $(document).ready(function(){
-        $('#categoryId').select2();
-        $('#tag').select2();
-    });
     function setCategoryEdit(id) {
         $('#id_edit').val($("#td_id_" + id).text());
         $('#name_edit').val($("#td_category_name_" + id).text());

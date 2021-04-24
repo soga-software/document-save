@@ -10,11 +10,19 @@
             </div>
             <div class="modal-body">
                 <div class="card mb-0 p-3">
-                    <form action="{{route('tag.update')}}" method="post">
+                    <form action="{{route('library.update')}}" method="post">
                         @csrf
                         <input id="id_edit" name="id_edit" type="hidden">
                         <div class="form-group mb-3">
-                            <input id="name_edit" name="name_edit" type="text" class="form-control" placeholder="Tên tag">
+                            <input id="name_edit" name="name_edit" type="text" class="form-control" placeholder="Tên trang">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <input id="link_edit" name="link_edit" type="text" class="form-control" placeholder="Kết nối">
+                        </div>
+
+                        <div class="form-group">
+                            <textarea id="note_edit" name="note_edit" class="form-control" rows="5" placeholder="Mô tả trang tài liệu"></textarea>
                         </div>
 
                         <div class="btn-toolbar form-group mb-0">

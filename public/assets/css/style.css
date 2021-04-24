@@ -1,3 +1,11 @@
 .mh-50{
     min-height: 50px !important;
 }
+
+.br-50 {
+    border-radius: 50px;
+}
+
+.has-submenu .select2-selection{
+    border-radius: 50px;
+}

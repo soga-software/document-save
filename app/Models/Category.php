@@ -109,12 +109,7 @@ class Category extends Base
      */
     public static function destroyCategory(Request $request)
     {
-        $detroyResult = self::where('id', $request->id)->update(
-            array(
-                'deleted_at' => date('Y-m-d H:i:s')
-            )
-        );
-
+        $detroyResult = self::where('id', $request->id)->update(['deleted_at' => date('Y-m-d H:i:s')]);
         return $detroyResult;
     }
 }

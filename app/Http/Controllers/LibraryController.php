@@ -3,20 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Base\Response;
-use App\Models\Category;
-use App\Models\Document;
-use App\Models\Tag;
+use App\Models\Library;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DocumentController extends Controller
+class LibraryController extends Controller
 {
     // view contants
-    const INDEX_VIEW = 'pages.document.index';
-    const INDEX_ROUTE = 'document.index';
+    const INDEX_VIEW = 'pages.library.index';
+    const INDEX_ROUTE = 'library.index';
     const CREATE_RULE = array();
-    const UPDATE_RULE = array();
     const DESTROY_RULE = array();
+
 
     /**
      * Display a listing of the resource.
@@ -27,29 +25,16 @@ class DocumentController extends Controller
      */
     public function index(Request $request)
     {
-        $categoriesSelect = Category::categorySelect();
-        $tagSelect = Tag::tagSelect();
-        if (
-            !empty($request->tag_id)
-            || (isset($request->category_id) && '0' != $request->category_id)
-            || (isset($request->name) && null != $request->name)
-            || (isset($request->type) && null != $request->type)
-        ) {
-            $documents = Document::documentSearch($request);
+        if ('' != $request->library) {
+            $libraries = Library::libraryIndex();
         } else {
-            $documents = Document::documentIndex();
-        }
-        foreach ($documents as $document) {
-            $document->tagShow = Tag::tagOfDocument($document);
+            $libraries = Library::librarySearch($request);
         }
         $request->flash('request', $request);
+
         return view(self::INDEX_VIEW, array(
             'data' => array(
-                'categories' => $categoriesSelect,
-                'categoryJsons' => $categoriesSelect->toJson(),
-                'tags' => $tagSelect,
-                'tagJsons' => $tagSelect->toJson(),
-                'documents' => $documents,
+                'libraries' => $libraries,
             ),
         ));
     }
@@ -70,25 +55,26 @@ class DocumentController extends Controller
         ]);
         // Run check validaty if false
         $this->exam();
-        if ($this->status == self::VALIDATE) {
+        if (
+            $this->status == self::VALIDATE
+        ) {
             $request->flash('request', $request);
             return Response::redirectInput(self::INDEX_VIEW, $this->errors->all());
         }
-        $request->flash('request', $request);
+
         DB::transaction(function () use ($request) {
-            Document::setDocument($request);
+            Library::setLibrary($request);
         });
 
         return redirect()
             ->route(self::INDEX_ROUTE)
-            ->with('messages', ['Tạo tài liệu thành công']);
+            ->with('messages', ['Tạo trang tài liệu thành công']);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -96,22 +82,25 @@ class DocumentController extends Controller
     {
         // setting config
         $this->config([
-            'rule' => self::UPDATE_RULE,
+            'rule' => self::CREATE_RULE,
             'request' => $request,
         ]);
         // Run check validaty if false
         $this->exam();
-        if ($this->status == self::VALIDATE) {
-            return Response::redirectInput(self::INDEX_VIEW, $this->errors->all(), $id);
+        if (
+            $this->status == self::VALIDATE
+        ) {
+            $request->flash('request', $request);
+            return Response::redirectInput(self::INDEX_VIEW, $this->errors->all());
         }
-        $request->flash('request', $request);
+
         DB::transaction(function () use ($request) {
-            Document::updateDocument($request);
+            Library::updateLibrary($request);
         });
 
         return redirect()
             ->route(self::INDEX_ROUTE)
-            ->with('messages', ['Cập nhật tài liệu thành công']);
+            ->with('messages', ['Cập nhật trang tài liệu thành công']);
     }
 
     /**
@@ -122,8 +111,9 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $id)
     {
+        $request->request->add(['id' => $id]);
         // setting config
         $this->config([
             'rule' => self::DESTROY_RULE,
@@ -131,15 +121,17 @@ class DocumentController extends Controller
         ]);
         // Run check validaty if false
         $this->exam();
-        if ($this->status == self::VALIDATE) {
-            return Response::redirectInput(self::INDEX_VIEW, $this->errors->all(), $id);
+        if (
+            $this->status == self::VALIDATE
+        ) {
+            return Response::redirect(self::INDEX_ROUTE, $this->errors->all());
         }
         DB::transaction(function () use ($request) {
-            Document::destroyDocument($request);
+            Library::destroyLibrary($request);
         });
 
         return redirect()
             ->route(self::INDEX_ROUTE)
-            ->with('messages', ['Xóa tài liệu thành công']);
+            ->with('messages', ['Xóa trang tài liệu thành công']);
     }
 }
