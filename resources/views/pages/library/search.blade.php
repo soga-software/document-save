@@ -14,7 +14,7 @@
                 </a>
             </li>
             <li class="has-submenu">
-                <a href="#">
+                <a href="{{ route('library.index') }}">
                     <span>Library</span>
                 </a>
             </li>

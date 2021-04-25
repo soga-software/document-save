@@ -53,8 +53,9 @@
                             <div class="button-list btn-social-icon ml-2 d-flex align-items-center">
                                 <button type="submit" class="btn btn-success btn-xs">Search</button>
                                 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addModal" data-animation="fade">Add</button>
-                                <a class="btn btn-danger btn-xs font-11" href="{{ route('category.index') }}">Category</a>
-                                <a class="btn btn-danger btn-xs font-11" href="{{ route('tag.index') }}">Tag</a>
+                                <a role="button" class="btn btn-danger btn-xs font-11" href="{{ route('category.index') }}">Category</a>
+                                <a role="button" class="btn btn-danger btn-xs font-11" href="{{ route('library.index') }}">Library</a>
+                                <a role="button" class="btn btn-danger btn-xs font-11" href="{{ route('tag.index') }}">Tag</a>
                             </div>
                         </div>
                     </div>

@@ -12,9 +12,6 @@
     $(document).ready(function() {
         $('#categoryId').select2();
         $('#tag').select2();
-        // var categoryList = JSON.parse('{{ $data['categoryJsons'] }}');
-        // var tagList = JSON.parse('{{ $data['tagJsons'] }}');
-
     });
     function setDocumentEdit(id) {
         $('#id_edit').val(id);
@@ -47,7 +44,7 @@
     //         case 'VIBLO':
     //             changeClassCSS(id, 'primary')
     //             break;
-        
+
     //         default:
     //             break;
     //     }
