@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="../assets/images/favicon.ico">
 
     <!-- Plugins css -->
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     {{-- <link href="{{URL::to('/')}}/assets/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" /> --}}
     <link href="{{URL::to('/')}}/assets/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
     {{-- <link href="{{URL::to('/')}}/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css" rel="stylesheet" type="text/css" /> --}}

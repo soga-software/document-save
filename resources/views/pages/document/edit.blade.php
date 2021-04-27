@@ -56,9 +56,13 @@
                                     <span>Lưu</span>
                                     <i class="far fa-paper-plane ml-3"></i>
                                 </button>
-                                <button type="button" class="btn btn-gradient-danger waves-effect waves-light" data-dismiss="modal" >
+                                <a class="btn btn-gradient-danger waves-effect waves-light"  href="#" onclick="setDelete()" data-toggle="modal" data-target="#deleteAlert" data-animation="fade">
+                                    <span>Xóa</span>
+                                    <i class="fas fa-trash-alt ml-3"></i>
+                                </a>
+                                <button type="button" class="btn btn-gradient-info waves-effect waves-light" data-dismiss="modal" >
                                     <span>Hủy</span>
-                                    <i class="far fa-trash-alt ml-3"></i>
+                                    <i class="fas fa-chevron-left ml-3"></i>
                                 </button>
                             </div>
                         </div>

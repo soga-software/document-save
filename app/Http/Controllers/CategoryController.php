@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        if ('' != $request->category) {
+        if (!isset($request->category) || '' == $request->category) {
             $categories = Category::categoryIndex();
         } else {
             $categories = Category::categorySearch($request);

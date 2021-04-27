@@ -26,7 +26,7 @@ class TagController extends Controller
      */
     public function index(Request $request)
     {
-        if ('' == $request->tag) {
+        if (!isset($request->tag) || '' == $request->tag) {
             $tags = Tag::tagIndex();
         } else {
             $tags = Tag::tagSearch($request);
