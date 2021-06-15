@@ -14,7 +14,9 @@ class DocumentController extends Controller
     // view contants
     const INDEX_VIEW = 'pages.document.index';
     const INDEX_ROUTE = 'document.index';
-    const CREATE_RULE = array();
+    const CREATE_RULE = array(
+        'link_add' => 'required|unique:documents,link'
+    );
     const UPDATE_RULE = array();
     const DESTROY_RULE = array();
 

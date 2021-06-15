@@ -1,38 +1,36 @@
 <div class="row">
     <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="mt-0 header-title">Danh sách tag</h5>
-                <div class="table-responsive">
-                    <table class="table mb-0">
-                        <thead class="thead-light">
-                            <tr>
-                                <th colspan="2" >ID</th>
-                                <th colspan="6" >Tên tag</th>
-                                <th colspan="4" >Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @if(0 != sizeof($data['tags']))
-                        @foreach ($data['tags'] as $tag)
-                            <tr>
-                                <td colspan="2" id="td_id_{{ $tag->id }}">{{ $tag->id }}</td>
-                                <td colspan="6" id="td_tag_name_{{ $tag->id }}">{{ $tag->tag_name }}</td>
-                                <td colspan="4">
-                                    <span onclick="setTagEdit('{{$tag->id}}')" class="badge badge-soft-info"  data-toggle="modal" data-target="#editModal" data-animation="fade" >
-                                        <i class="las la-pen text-primary font-18"></i>
-                                    </span>
-                                    <span onclick="setElementValue('#idDelete', '{{ route('tag.destroy', ['id'=> $tag->id]) }}')" data-toggle="modal" data-target="#deleteAlert" data-animation="fade" class="badge badge-soft-info">
-                                        <i class="las la-trash-alt text-danger font-18"></i>
-                                    </span>
-                                </td>
-                            </tr>
-                        @endforeach
-                        @else
-                        @include('pages.emptydata')
-                        @endif
-                        </tbody>
-                    </table>
+        <div class="card mt-4">
+            <div class="card-body bg-light">
+                <h5 class="card-title mt-0">Danh sách Tag</h5>
+                <div class="row">
+                    @if(0 != sizeof($data['tags']))
+                    @foreach ($data['tags'] as $key => $tag)
+                    <div class="col-md-4">
+                        <div class="card card-border m-1">
+                            <div class="card-body">
+                                <div class="card-subtitle font-14 d-flex justify-content-between align-items-center mh-50">
+                                    <h6 class="m-0" onclick="viewNote('{{$tag->id}}', true)">
+                                        <span class="mr-2 font-10" id="td_id_{{ $tag->id }}">{!! $tag->id !!}</span>
+                                        <span class="mr-2">|</span>
+                                        <a href="{{route('document.index')}}/?name=&category_id=0&tag_id%5B%5D={{ $tag->id }}')}}" class="text-blue" id="td_tag_name_{{ $tag->id }}"> {{ $tag->tag_name }}</span>
+                                    </h6>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <a onclick="setTagEdit('{{$tag->id}}')" class="mr-3 text-info"  data-toggle="modal" data-target="#editModal" data-animation="fade" >
+                                            <i class="fas fa-eye-dropper font-12 text-primary"></i>
+                                        </a>
+                                        <a onclick="setElementValue('#idDelete', '{{ route('tag.destroy', ['id'=> $tag->id]) }}')" data-toggle="modal" data-target="#deleteAlert" data-animation="fade">
+                                            <i class="fas fa-trash font-12 text-danger"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                    @else
+                    @include('pages.emptydata')
+                    @endif
                 </div>
             </div>
         </div>

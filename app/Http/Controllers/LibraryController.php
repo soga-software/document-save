@@ -12,7 +12,9 @@ class LibraryController extends Controller
     // view contants
     const INDEX_VIEW = 'pages.library.index';
     const INDEX_ROUTE = 'library.index';
-    const CREATE_RULE = array();
+    const CREATE_RULE = array(
+        'name_add' => 'required|unique:libraries,library_name|string:200'
+    );
     const DESTROY_RULE = array();
 
 
@@ -59,7 +61,7 @@ class LibraryController extends Controller
             $this->status == self::VALIDATE
         ) {
             $request->flash('request', $request);
-            return Response::redirectInput(self::INDEX_VIEW, $this->errors->all());
+            return Response::redirectInput(self::INDEX_ROUTE, $this->errors->all());
         }
 
         DB::transaction(function () use ($request) {
@@ -91,7 +93,7 @@ class LibraryController extends Controller
             $this->status == self::VALIDATE
         ) {
             $request->flash('request', $request);
-            return Response::redirectInput(self::INDEX_VIEW, $this->errors->all());
+            return Response::redirectInput(self::INDEX_ROUTE, $this->errors->all());
         }
 
         DB::transaction(function () use ($request) {

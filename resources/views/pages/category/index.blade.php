@@ -1,6 +1,10 @@
 @extends('layouts.main')
 @section('page')
-
+<style lang="css">
+    .mw-20 {
+        min-width: 20px !important;
+    }
+</style>
 @include('pages.category.search')
 @include('pages.category.list')
 @include('pages.category.add')

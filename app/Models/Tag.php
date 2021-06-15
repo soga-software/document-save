@@ -54,7 +54,7 @@ class Tag extends Base
      */
     public static function tagIndex()
     {
-        $tags = self::where('deleted_at', null)->orderBy('tag_name', 'ASC')->select('tags.*')->paginate(25);
+        $tags = self::where('deleted_at', null)->orderBy('tag_name', 'ASC')->select('tags.*')->paginate(100);
         return $tags;
     }
 
@@ -72,7 +72,7 @@ class Tag extends Base
             ->where('deleted_at', null)
             ->orderBy('tag_name', 'ASC')
             ->select('tags.*')
-            ->paginate(25);
+            ->paginate(100);
 
         return $tag;
     }

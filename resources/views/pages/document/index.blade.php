@@ -66,5 +66,12 @@
     //             break;
     //     }
     // }
+    var htmlValue = '';
+    function importBookmark(){
+        $.get("{{URL::to('/')}}/bookmarks_4_28_21.html", function(data) {
+            htmlValue= data;
+            htmlValue = $.parseHTML(htmlValue);
+        }, 'html');
+    }
 </script>
 @endsection

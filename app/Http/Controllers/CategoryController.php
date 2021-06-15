@@ -12,7 +12,10 @@ class CategoryController extends Controller
     // view contants
     const INDEX_VIEW = 'pages.category.index';
     const INDEX_ROUTE = 'category.index';
-    const CREATE_RULE = array();
+    const CREATE_RULE = array(
+        'name_add' => 'required|unique:categories,category_name|string:200'
+    );
+    const UPDATE_RULE = array();
     const DESTROY_RULE = array();
 
 
@@ -59,7 +62,7 @@ class CategoryController extends Controller
             $this->status == self::VALIDATE
         ) {
             $request->flash('request', $request);
-            return Response::redirectInput(self::INDEX_VIEW, $this->errors->all());
+            return Response::redirectInput(self::INDEX_ROUTE, $this->errors->all());
         }
 
         DB::transaction(function () use ($request) {
@@ -82,7 +85,7 @@ class CategoryController extends Controller
     {
         // setting config
         $this->config([
-            'rule' => self::CREATE_RULE,
+            'rule' => self::UPDATE_RULE,
             'request' => $request,
         ]);
         // Run check validaty if false
@@ -91,7 +94,7 @@ class CategoryController extends Controller
             $this->status == self::VALIDATE
         ) {
             $request->flash('request', $request);
-            return Response::redirectInput(self::INDEX_VIEW, $this->errors->all());
+            return Response::redirectInput(self::INDEX_ROUTE, $this->errors->all());
         }
 
         DB::transaction(function () use ($request) {

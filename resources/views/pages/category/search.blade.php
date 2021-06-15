@@ -1,5 +1,5 @@
 @section('search')
-<div class="navbar-custom-menu">
+<div class="navbar-custom-menu pl-4">
     <div id="navigation">
         <!-- Navigation Menu-->
         <ul class="navigation-menu">

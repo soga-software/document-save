@@ -1,45 +1,40 @@
 <div class="row">
     <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="mt-0 header-title">Danh sách chuyên mục</h5>
-                <div class="table-responsive">
-                    <table class="table mb-0">
-                        <thead class="thead-light">
-                            <tr>
-                                <th>ID</th>
-                                <th>Icon</th>
-                                <th>Chuyên mục</th>
-                                <th>Ghi chú</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @if(0 != sizeof($data['categories']))
-                        @foreach ($data['categories'] as $category)
-                            <tr>
-                                <td id="td_id_{{ $category->id }}">{{ $category->id }}</td>
-                                <td>
-                                    <span id="td_icon_{{ $category->id }}" class="d-none">{{ $category->icon }}</span>
-                                    {!! $category->icon !!}
-                                </td>
-                                <td id="td_category_name_{{ $category->id }}">{{ $category->category_name }}</td>
-                                <td id="td_note_{{ $category->id }}">{{ $category->note }}</td>
-                                <td>
-                                    <span onclick="setCategoryEdit('{{$category->id}}')" class="badge badge-soft-success"  data-toggle="modal" data-target="#editModal" data-animation="fade" >
-                                        <i class="las la-pen text-primary font-18"></i>
-                                    </span>
-                                    <span onclick="setElementValue('#idDelete', '{{ route('category.destroy', ['id'=> $category->id]) }}')" data-toggle="modal" data-target="#deleteAlert" data-animation="fade" class="badge badge-soft-success">
-                                        <i class="las la-trash-alt text-danger font-18"></i>
-                                    </span>
-                                </td>
-                            </tr>
-                        @endforeach
-                        @else
-                        @include('pages.emptydata')
-                        @endif
-                        </tbody>
-                    </table>
+        <div class="card mt-4">
+            <div class="card-body bg-light">
+                <h5 class="card-title mt-0">Danh sách Chuyên mục</h5>
+                <div class="row">
+                    @if(0 != sizeof($data['categories']))
+                    @foreach ($data['categories'] as $key => $category)
+                    <div class="col-md-4">
+                        <div class="card card-border m-1">
+                            <div class="card-body">
+                                <span id="td_note_{{ $category->id }}" class="d-none">{{ $category->note}}</span>
+                                <div class="card-subtitle font-14 d-flex justify-content-between align-items-center mh-50">
+                                    <h6 class="m-0" onclick="viewNote('{{$category->id}}', true)">
+                                        <span id="td_icon_{{ $category->id }}" class="d-none">{{ $category->icon }}</span>
+                                        <span class="mr-2 font-10 mw-20" id="td_id_{{ $category->id }}">{!! $category->id !!}</span>
+                                        <span class="mr-2">|</span>
+                                        <a href="{{route('document.index')}}/?name=&type=&category_id={{ $category->id }}" class="text-blue" id="td_category_name_{{ $category->id }}">{{ $category->category_name }}</a>
+                                    </h6>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        {!! $category->icon !!}
+                                        <a onclick="setCategoryEdit('{{$category->id}}')" class="ml-3 mr-3 text-info"  data-toggle="modal" data-target="#editModal" data-animation="fade" >
+                                            <i class="fas fa-eye-dropper font-12 text-primary"></i>
+                                        </a>
+                                        <a onclick="setElementValue('#idDelete', '{{ route('category.destroy', ['id'=> $category->id]) }}')" data-toggle="modal" data-target="#deleteAlert" data-animation="fade">
+                                            <i class="fas fa-trash font-12 text-danger"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <p class="text-info font-11 mb-0" id="td_note_{{ $category->id }}">{{ $category->note }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                    @else
+                    @include('pages.emptydata')
+                    @endif
                 </div>
             </div>
         </div>

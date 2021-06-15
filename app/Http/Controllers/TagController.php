@@ -12,7 +12,9 @@ class TagController extends Controller
     // view contants
     const INDEX_VIEW = 'pages.tag.index';
     const INDEX_ROUTE = 'tag.index';
-    const CREATE_RULE = array();
+    const CREATE_RULE = array(
+        'name_add' => 'required|unique:tags,tag_name|string:200'
+    );
     const UPDATE_RULE = array();
     const DESTROY_RULE = array();
 
@@ -60,7 +62,7 @@ class TagController extends Controller
             $this->status == self::VALIDATE
         ) {
             $request->flash('request', $request);
-            return Response::redirectInput(self::INDEX_VIEW, $this->errors->all());
+            return Response::redirectInput(self::INDEX_ROUTE, $this->errors->all());
         }
 
         DB::transaction(function () use ($request) {
@@ -92,7 +94,7 @@ class TagController extends Controller
             $this->status == self::VALIDATE
         ) {
             $request->flash('request', $request);
-            return Response::redirectInput(self::INDEX_VIEW, $this->errors->all());
+            return Response::redirectInput(self::INDEX_ROUTE, $this->errors->all());
         }
 
         DB::transaction(function () use ($request) {
