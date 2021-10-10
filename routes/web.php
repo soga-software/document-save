@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\View\DocumentView;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\Api\DocumentApi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,12 +26,6 @@ Auth::routes([
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-    Route::get('index', [DocumentController::class, 'index'])->name('document.index');
-    Route::post('store', [DocumentController::class, 'store'])->name('document.store');
-    Route::post('update', [DocumentController::class, 'update'])->name('document.update');
-    Route::get('destroy', [DocumentController::class, 'destroy'])->name('document.destroy');
     // Category routes
     Route::get('category/', [CategoryController::class, 'index'])->name('category.index');
     Route::post('category/store', [CategoryController::class, 'store'])->name('category.store');
@@ -45,4 +41,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('library/store', [LibraryController::class, 'store'])->name('library.store');
     Route::post('library/update', [LibraryController::class, 'update'])->name('library.update');
     Route::get('library/destroy/{id}', [LibraryController::class, 'destroy'])->name('library.destroy');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('home', [DocumentView::class, 'index'])->name('document.index');
+    Route::get('index', [DocumentView::class, 'index'])->name('document.index');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['prefix' => 'api'], function () {
+        Route::get('index', [DocumentApi::class, 'fetchData'])->name('api.document.index');
+        Route::post('store', [DocumentApi::class, 'store'])->name('api.document.store');
+        Route::post('update', [DocumentApi::class, 'update'])->name('api.document.update');
+        Route::post('destroy', [DocumentApi::class, 'destroy'])->name('api.document.destroy');
+    });
 });

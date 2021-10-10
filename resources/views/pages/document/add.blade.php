@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="card mb-0 p-3">
-                    <form action="{{route('document.store')}}" method="post">
+                    <form id="addForm">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -51,7 +51,7 @@
                         </div>
                         <div class="btn-toolbar form-group mb-0">
                             <div class="pull-right">
-                                <button class="btn btn-gradient-primary waves-effect waves-light">
+                                <button type="button" class="btn btn-gradient-primary waves-effect waves-light" onclick="insertData()">
                                     <span>Lưu</span>
                                     <i class="far fa-paper-plane ml-3"></i>
                                 </button>

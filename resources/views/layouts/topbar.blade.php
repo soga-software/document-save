@@ -4,7 +4,7 @@
     <div class="topbar-inner">
         <!-- LOGO -->
         <div class="topbar-left"style="width: auto;">
-            <a href="/index" class="logo">
+            <a href="{{route('document.index')}}" class="logo">
                 <span>
                     <img src="{{URL::to('/')}}/assets/images/logo-sm.png" alt="logo-small" class="logo-sm">
                 </span>

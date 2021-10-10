@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="card mb-0 p-3">
-                    <form action="{{route('document.update')}}" method="post">
+                    <form id="updateForm">
                         @csrf
                         <input id="id_edit" name="id_edit" type="hidden">
                         <div class="row">
@@ -52,11 +52,11 @@
                         </div>
                         <div class="btn-toolbar form-group mb-0">
                             <div class="pull-right">
-                                <button type="submit" class="btn btn-gradient-primary waves-effect waves-light">
+                                <button id="updateBtn" type="button" class="btn btn-gradient-primary waves-effect waves-light">
                                     <span>Lưu</span>
                                     <i class="far fa-paper-plane ml-3"></i>
                                 </button>
-                                <a class="btn btn-gradient-danger waves-effect waves-light"  href="#" onclick="setDelete()" data-toggle="modal" data-target="#deleteAlert" data-animation="fade">
+                                <a class="btn btn-gradient-danger waves-effect waves-light"  href="#" data-toggle="modal" data-target="#deleteDocument" data-animation="fade">
                                     <span>Xóa</span>
                                     <i class="fas fa-trash-alt ml-3"></i>
                                 </a>

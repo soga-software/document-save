@@ -61,6 +61,8 @@
 
 <!-- App js -->
 <script src="{{URL::to('/')}}/assets/js/app.js"></script>
+<script src="{{URL::to('/')}}/app/js/index.js"></script>
+<script src="{{URL::to('/')}}/app/js/toast.js"></script>
 <script>
     function setElementValue(element ,route) {
         $(element).attr("href", route);

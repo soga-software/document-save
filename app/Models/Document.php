@@ -24,7 +24,7 @@ class Document extends Base
         $documents = self
             ::join('categories', 'categories.id', 'documents.category_id')
             ->where('documents.deleted_at', null)
-            ->orderBy('documents.name', 'ASC')
+            ->orderBy('documents.name', 'DESC')
             ->select('documents.*', 'categories.category_name', 'categories.icon AS category_icon')
             ->paginate(50);
 
@@ -38,25 +38,24 @@ class Document extends Base
      *
      * @return
      */
-    public static function documentSearch(Request $request)
+    public static function documentSearch($param)
     {
         $sqlQuery = self::join('categories', 'categories.id', 'documents.category_id');
-        if ('' != $request->name) {
-            $sqlQuery->where('documents.name', 'LIKE', "%" . $request->name . "%");
+        if ('' != $param['name']) {
+            $sqlQuery->where('documents.name', 'LIKE', "%" . $param['name'] . "%");
         }
-        if ('' != $request->type) {
-            $sqlQuery->where('documents.type', 'LIKE', "%" . $request->type . "%");
+        if ('' != $param['type']) {
+            $sqlQuery->where('documents.type', 'LIKE', "%" . $param['type'] . "%");
         }
-        if ('0' != $request->category_id) {
-            $sqlQuery->where('categories.id', $request->category_id);
+        if ('0' != $param['category_id']) {
+            $sqlQuery->where('categories.id', $param['category_id']);
         }
-        if (!empty($request->tag_id)) {
-            if (sizeof($request->tag_id) == 1) {
-                $sqlQuery->where('documents.tag_id', 'LIKE', "%" . $request->tag_id[0] . "%");
+        if (!empty($param['tag_id'])) {
+            if (sizeof($param['tag_id']) == 1) {
+                $sqlQuery->where('documents.tag_id', 'LIKE', "%" . $param['tag_id'][0] . "%");
             } else {
-                $sqlQuery->where(function ($query) use ($request) {
-                    foreach ($request->tag_id as $key => $tag) {
-                        dd($request->tag_id);
+                $sqlQuery->where(function ($query) use ($param) {
+                    foreach ($param['tag_id'] as $key => $tag) {
                         if ($key == 0) {
                             $query->where('documents.tag_id', 'LIKE', "%" . $tag . "%");
                         } else {
