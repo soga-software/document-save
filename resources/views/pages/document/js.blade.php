@@ -144,22 +144,6 @@
         $('#note_edit').val($("#td_note_" + id).text());
     }
 
-    function viewNote(id, isShow){
-        if(isShow){
-            $("#view_note_" + id).attr("class","text-muted font-11 mb-0");
-        } else {
-            $("#view_note_" + id).attr("class","d-none");
-        }
-    }
-
-    var htmlValue = '';
-    function importBookmark(){
-        $.get("{{URL::to('/')}}/bookmarks_4_28_21.html", function(data) {
-            htmlValue= data;
-            htmlValue = $.parseHTML(htmlValue);
-        }, 'html');
-    }
-
     function goCategory(){
         setTimeout(function(){document.location.href = "{{ route('category.index') }}"},100);
     }
@@ -170,6 +154,18 @@
 
     function goLibrary(){
         setTimeout(function(){document.location.href = "{{ route('library.index') }}"},100);
+    }
+
+    function goImport(){
+        setTimeout(function(){document.location.href = "{{ route('import.index') }}"},100);
+    }
+
+    function viewNote(id, isShow){
+        if(isShow){
+            $("#view_note_" + id).attr("class","text-muted font-11 mb-0");
+        } else {
+            $("#view_note_" + id).attr("class","d-none");
+        }
     }
 
 </script>

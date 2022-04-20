@@ -2,7 +2,6 @@
     <div class="col-12">
         <div class="card mt-4">
             <div class="card-body bg-light">
-                <h5 class="card-title mt-0">Danh sách Chuyên mục</h5>
                 <div class="row">
                     @if(0 != sizeof($data['categories']))
                     @foreach ($data['categories'] as $key => $category)

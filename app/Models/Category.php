@@ -40,7 +40,7 @@ class Category extends Base
             ::where('deleted_at', null)
             ->orderBy('category_name', 'ASC')
             ->select('categories.*')
-            ->paginate(25);
+            ->paginate(50);
         return $categories;
     }
 
@@ -61,7 +61,7 @@ class Category extends Base
             ->where('deleted_at', null)
             ->orderBy('category_name', 'ASC')
             ->select('categories.*')
-            ->paginate(25);
+            ->paginate(50);
 
         return $categories;
     }

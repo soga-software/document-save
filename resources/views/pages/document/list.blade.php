@@ -27,6 +27,9 @@
             <div class="card mt-4">
                 <div class="card-body bg-light">
                     <div class="row">
+                        <div class="col-md-12">
+                            {{$data['documents']->links("pagination::bootstrap-4")}}
+                        </div>
                         @if(0 != sizeof($data['documents']))
                         @foreach ($data['documents'] as $key => $document)
                         <div class="col-md-12">
@@ -61,7 +64,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                     <p class="d-none" id="view_note_{{ $document->id }}" onclick="viewNote('{{$document->id}}', false)">{{ $document->note }}</p>
                                 </div>
@@ -71,6 +73,9 @@
                         @else
                         @include('pages.emptydata')
                         @endif
+                        <div class="col-md-12 pt-2">
+                            {{$data['documents']->links("pagination::bootstrap-4")}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -78,8 +83,6 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
-            {{$data['documents']->links("pagination::bootstrap-4")}}
-        </div>
+
     </div>
 </div>

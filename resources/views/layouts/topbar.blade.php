@@ -1,20 +1,10 @@
 
 <!-- Top Bar Start -->
-<div class="topbar">
-    <div class="topbar-inner">
-        <!-- LOGO -->
-        <div class="topbar-left"style="width: auto;">
-            <a href="{{route('document.index')}}" class="logo">
-                <span>
-                    <img src="{{URL::to('/')}}/assets/images/logo-sm.png" alt="logo-small" class="logo-sm">
-                </span>
-                <span>
-                    <img src="{{URL::to('/')}}/assets/images/logo-sm.png" alt="logo-large" class="logo-lg logo-light">
-                </span>
-            </a>
+<div class="fixed-top">
+    <div class="row">
+        <div class="col-12">
+            @yield('search')
         </div>
-        <!--end logo-->
-        @yield('search')
     </div>
 </div>
 <!-- Top Bar End -->

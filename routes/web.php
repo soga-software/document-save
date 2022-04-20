@@ -6,6 +6,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\Api\DocumentApi;
+use App\Http\Controllers\View\ImportView;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +42,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('library/store', [LibraryController::class, 'store'])->name('library.store');
     Route::post('library/update', [LibraryController::class, 'update'])->name('library.update');
     Route::get('library/destroy/{id}', [LibraryController::class, 'destroy'])->name('library.destroy');
+
+    // Library routes
+    Route::get('import/', [ImportView::class, 'index'])->name('import.index');
+    // Route::post('library/store', [LibraryController::class, 'store'])->name('library.store');
+    // Route::post('library/update', [LibraryController::class, 'update'])->name('library.update');
+    // Route::get('library/destroy/{id}', [LibraryController::class, 'destroy'])->name('library.destroy');
 });
 
 Route::group(['middleware' => 'auth'], function () {

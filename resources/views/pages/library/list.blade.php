@@ -2,29 +2,31 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="mt-0 header-title">Danh sách thư viện học tập</h5>
                 <div class="table-responsive">
                     <table class="table mb-0">
                         <thead class="thead-light">
                             <tr>
-                                <th>ID</th>
+                                {{-- <th>ID</th> --}}
                                 <th>Website</th>
-                                <th>Kết nối</th>
+                                <th>Chú thích</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                         @if(0 != sizeof($data['libraries']))
                         @foreach ($data['libraries'] as $library)
+
                             <tr>
-                                <td id="td_id_{{ $library->id }}">{{ $library->id }}</td>
-                                <td id="td_library_name_{{ $library->id }}">{{ $library->library_name }}</td>
+                                <td class="d-none" id="td_id_{{ $library->id }}">{{ $library->id }}</td>
+                                <td class="d-none" id="td_link_{{ $library->id }}">{{ $library->link }}</td>
+                                <td class="d-none" id="td_note_{{ $library->id }}">{{ $library->note }}</td>
+                                <td class="d-none" id="td_library_name_{{ $library->id }}">{{ $library->library_name }}</td>
                                 <td>
-                                    <a id="td_link_{{ $library->id }}" href="{{ $library->link }}" target="_blank">
-                                        <i class="fas fa-link"></i>
+                                    <a href="{{ $library->link }}" target="_blank">
+                                        {{ $library->library_name }}
                                     </a>
-                                    <span class="d-none" id="td_note_{{ $library->id }}">{{ $library->note }}</span>
                                 </td>
+                                <td>{{ $library->note }}</td>
                                 <td>
                                     <span onclick="setLibraryEdit('{{$library->id}}')" class="badge badge-soft-success"  data-toggle="modal" data-target="#editModal" data-animation="fade" >
                                         <i class="las la-pen text-primary font-18"></i>

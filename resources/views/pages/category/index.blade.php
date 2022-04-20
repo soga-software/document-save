@@ -18,5 +18,21 @@
         $('#icon_edit').val($("#td_icon_" + id).text());
         $('#note_edit').val($("#td_note_" + id).text());
     }
+    function goCategory(){
+        setTimeout(function(){document.location.href = "{{ route('category.index') }}"}, 100);
+    }
+
+    function goTag(){
+        setTimeout(function(){document.location.href = "{{ route('tag.index') }}"}, 100);
+    }
+
+    function goLibrary(){
+        setTimeout(function(){document.location.href = "{{ route('library.index') }}"}, 100);
+    }
+
+    function goHome(){
+        setTimeout(function(){document.location.href = "{{ route('document.index') }}"}, 100);
+    }
+
 </script>
 @endsection
